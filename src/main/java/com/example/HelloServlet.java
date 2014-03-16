@@ -18,11 +18,11 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
         ServletInputStream inp = req.getInputStream();
+        resp.sendError(9001, "Too good to be displayed");
         resp.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
         resp.setHeader("Location", "http://www.google.com");
-        resp.sendRedirect("http://www.google.com");
+        //resp.sendRedirect("http://www.google.com");
         out.write("Hello PAGE\n".getBytes());
-        out.write("This is silly.".getBytes());
         out.flush();
         out.close();
     }
