@@ -20,16 +20,17 @@
 	<section id="left_col">
 		<form action="demo_form.asp">
 			Lisainfo: <input type="search" name="search"><br>
-			Hind: <input type="range" name="price" min="100" max="1000"><br>
+			<input type="text" id="textInput" value=""><br>
+			Hind: <input type="range" name="price" min="100" max="1000" onchange="updateSlider(this.value);><br>
 			<input type="checkbox" name="attribute1" value="Attribute1">Something<br>
 			<input type="checkbox" name="attribute2" value="Attribute2">Something<br>
-			<input type="checkbox" name="attribute3" value="Attribute3">Something<br>
+			<input type="checkbox" name="jattribute3" value="Attribute3">Something<br>
 			<input type="checkbox" name="attribute4" value="Attribute4">Something<br>
 			<select name="D1">
 			  <option value="Tartumaa">Tartumaa</option>
 			  <option value="Harjumaa">Harjumaa</option>
 			  <option value="Saaremaa">Saaremaa</option>
-			  <option value="Võrumaa">Võrumaa</option>
+			  <option value="Vï¿½rumaa">Vï¿½rumaa</option>
 			</select><br>
 			<select name="D2">
 			  <option value="Vald1">Vald1</option>
@@ -52,6 +53,7 @@
 	<br>
 	</section>
 	</main>
+	<script src="/js/testscripts.js"></script>
 </body>
 
 </html>
