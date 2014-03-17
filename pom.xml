@@ -71,6 +71,11 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.6.10.Final</version>
         </dependency>
+		<dependency>
+			<groupId>net.jangaroo.com.sencha</groupId>
+			<artifactId>ext-js</artifactId>
+			<version>3.4.0</version>
+		</dependency>
     </dependencies>
 
     <build>
