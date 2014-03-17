@@ -22,9 +22,9 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {		
         ServletOutputStream out = resp.getOutputStream();
         ServletInputStream inp = req.getInputStream();
-        resp.sendError(9001, "Too good to be displayed");
-        resp.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-        resp.setHeader("Location", "http://www.google.com");
+        byte[] arr = new byte[255];
+        int j = inp.read(arr, 0, 255);
+        out.write(("Bytes read: " + j + "; reading : " + arr.toString()).getBytes());
         //resp.sendRedirect("http://www.google.com");
         out.write("Hello PAGE\n".getBytes());
         out.flush();
