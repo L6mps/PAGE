@@ -1,28 +1,36 @@
-#masthead {
+﻿#masthead {
 	text-align:center;
 }
 
 #container {
-	margin-left:auto;
-	margin-right:auto;
+	position:relative;
+	background-color:aqua;
+	margin-left:20%;
+	margin-right:20%;
 	width:60%;
-	padding: 20px;
-	min-width: 600px;
+	/*padding-top:20px;*/
 }
 
 #left_col {
-	padding: 20px;
-	width: 200px;
+	border:10px #FAFAFA solid;
+	background-color:#CCCCCC;
+	/*margin:10px;*/
+	width: 180px;
 	float:left;
 }
 
 #page_content {
-	margin-left:200px;
-	padding: 20px;
-	position:fixed;
-	max-width: 800px;
+	background-color:#CCCCCC;
+	border:10px #FAFAFA solid;
+	min-width:420px;
+	padding-top:20px;
+	position:absolute;
+	float:left;
+	left:180px;
+	right:0px;
+	
 }
 
-#paragraph {
-	width: 800px;
+body {
+	background-color:#FAFAFA;
 }
