@@ -1,8 +1,14 @@
 ﻿#masthead {
+	min-widht:600px;
+	margin-left:20%;
+	margin-righ:20%;
+	width:60%;
+	background-color:#CCCCCC;
 	text-align:center;
 }
 
 #container {
+	min-width=600px;
 	position:relative;
 	background-color:aqua;
 	margin-left:20%;
@@ -20,10 +26,8 @@
 }
 
 #page_content {
-	background-color:#CCCCCC;
-	border:10px #FAFAFA solid;
+	background-color:#FAFAFA;
 	min-width:420px;
-	padding-top:20px;
 	position:absolute;
 	float:left;
 	left:180px;
