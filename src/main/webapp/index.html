@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -22,21 +22,30 @@
 			Lisainfo: <input type="search" name="search"><br>
 			<input type="text" id="textInput" value=""><br>
 			Hind: <input type="range" name="price" min="100" max="1000" onchange="updateSlider(this.value)";><br>
-			<input type="checkbox" name="attribute1" value="Attribute1">Something<br>
-			<input type="checkbox" name="attribute2" value="Attribute2">Something<br>
-			<input type="checkbox" name="jattribute3" value="Attribute3">Something<br>
-			<input type="checkbox" name="attribute4" value="Attribute4">Something<br>
-			<select name="D1">
-			  <option value="Tartumaa">Tartumaa</option>
-			  <option value="Harjumaa">Harjumaa</option>
-			  <option value="Saaremaa">Saaremaa</option>
-			  <option value="V�rumaa">V�rumaa</option>
+			<input type="checkbox" name="attribute1" value="Attribute1">Dementsus<br>
+			<input type="checkbox" name="attribute2" value="Attribute2">Ratastool<br>
+			<input type="checkbox" name="jattribute3" value="Attribute3">Õendusabi<br>
+			<input type="checkbox" name="attribute4" value="Attribute4">Tasuline hooldus<br>
+			<select id="D1" onchange="locations()">
+			  <option value="0">Maakond</option>
+			  <option value="1">Harjumaa</option>
+			  <option value="2">Hiiumaa</option>
+			  <option value="3">Ida-Virumaa</option>
+			  <option value="4">Jõgevamaa</option>
+			  <option value="5">Järvamaa</option>
+			  <option value="6">Läänemaa</option>
+			  <option value="7">Lääne-Virumaa</option>
+			  <option value="8">Põlvamaa</option>
+			  <option value="9">Pärnumaa</option>
+			  <option value="10">Raplamaa</option>
+			  <option value="11">Saaremaa</option>
+			  <option value="12">Tartumaa</option>
+			  <option value="13">Valgamaa</option>
+			  <option value="14">Viljandimaa</option>
+			  <option value="15">Võrumaa</option>
 			</select><br>
-			<select name="D2">
-			  <option value="Vald1">Vald1</option>
-			  <option value="vald2">Vald2</option>
-			  <option value="vald3">Vald3</option>
-			  <option value="Vald4">Vald4</option>
+			<select id="D2">
+			  <option value="0">Vald</option>
 			</select><br>
 			<a href="search.html" target="frame">Submit</a>
 		</form>
@@ -47,6 +56,6 @@
 	</section>
 	</main>
 	<script src="/js/testscripts.js"></script>
+	<script src="/js/location.js"></script>
 </body>
-
 </html>
