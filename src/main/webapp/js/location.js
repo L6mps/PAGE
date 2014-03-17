@@ -1,70 +1,36 @@
-function locations() {
+﻿function changeLocation() {
 	var selopt = document.getElementById("D1").value;
 	x = document.getElementById("D2");
-	switch (selopt)
-	case 1:
-		x.innerHTML="
-		<option value=\"0\">Vald</option>
-		<option value=\"1\">Aegviidu</option>
-		<option value="2">Anija</option>
-		<option value="3">Harku</option>
-		<option value="4">J�el�htme</option>
-		<option value="5">Keila</option>
-		<option value="6">Kernu</option>
-		<option value="7">Kiili</option>
-		<option value="8">Kose</option>
-		<option value="9">Kuusalu</option>
-		<option value="10">Nissi</option>
-		<option value="11">Padise</option>
-		<option value="12">Raasiku</option>
-		<option value="13">Rae</option>
-		<option value="14">Saku</option>
-		<option value="15">Saue</option>
-		<option value="16">Vasalemma</option>
-		<option value="17">Viimsi</option>"
-		break;
-	case 2:
-		
-		break;
-	case 3:
-		
-		break;
-	case 4:
-	
-		break;
-	case 5:
-	
-		break;
-	case 6:
-	
-		break;
-	case 7:
-
-		break;
-	case 8:
-
-		break;
-	case 9:
-
-		break;
-	case 10:
-
-		break;
-	case 11:
-
-		break;
-	case 12:
-
-		break;
-	case 13:
-
-		break;
-	case 14:
-
-		break;
-	case 15:
-
-		break;
-	default:
-		
+	if(selopt == 1)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Aegviidu</option><option value=\"2\">Anija</option><option value=\"3\">Harku</option><option value=\"4\">Jõelähtme</option><option value=\"5\">Keila</option><option value=\"6\">Kernu</option><option value=\"7\">Kiili</option><option value=\"8\">Kose</option><option value=\"9\">Kuusalu</option><option value=\"10\">Nissi</option><option value=\"11\">Padise</option><option value=\"12\">Raasiku</option><option value=\"13\">Rae</option><option value=\"14\">Saku</option><option value=\"15\">Saue</option><option value=\"16\">Vasalemma</option><option value=\"17\">Viimsi</option>";
+	else if(selopt == 2)
+		x.innerHTML="<option value=\"1\">Emmaste</option><option value=\"2\">Hiiu</option><option value=\"3\">Käina</option><option value=\"4\">Pühalepa</option>";
+	else if(selopt == 3)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Alajõe</option><option value=\"2\">Aseri</option><option value=\"3\">Avinurme</option><option value=\"4\">Iisaku</option><option value=\"5\">Illuka</option><option value=\"5\">Jõhvi</option><option value=\"6\">Kohtla</option><option value=\"7\">Kohtla-Nõmme</option><option value=\"8\">Lohusuu</option><option value=\"9\">Lüganuse</option><option value=\"10\">Maidla</option><option value=\"11\">Mäetaguse</option><option value=\"12\">Sonda</option><option value=\"13\">Toila</option><option value=\"14\">Tudulinna</option><option value=\"15\">Vaivara</option>";
+	else if(selopt == 4)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Jõgeva</option><option value=\"2\">Kasepää</option><option value=\"3\">Pajusi</option><option value=\"4\">Pala</option><option value=\"5\">Palamuse</option><option value=\"6\">Puurmani</option><option value=\"7\">Põltsamaa</option><option value=\"8\">Saare</option><option value=\"9\">Tabivere</option><option value=\"10\">Torma</option>";
+	else if(selopt == 5)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Albu</option><option value=\"2\">Ambla</option><option value=\"3\">Imavere</option><option value=\"4\">Järva-Jaani</option><option value=\"5\">Kareda</option><option value=\"6\">Koeru</option><option value=\"7\">Koigi</option><option value=\"8\">Paide</option><option value=\"9\">Roosna-Alliku</option><option value=\"10\">Türi</option><option value=\"11\">Väätsa</option>";
+	else if(selopt == 6)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Hanila</option><option value=\"2\">Kullamaa</option><option value=\"3\">Lihula</option><option value=\"4\">Martna</option><option value=\"5\">Noarootsi</option><option value=\"6\">Nõva</option><option value=\"7\">Oru</option><option value=\"8\">Ridala</option><option value=\"9\">Risti</option><option value=\"10\">Taebla</option><option value=\"11\">Vormsi</option>";
+	else if(selopt == 7)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Haljala</option><option value=\"2\">Kadrina</option><option value=\"3\">Laekvere</option><option value=\"4\">Rakke</option><option value=\"5\">Rakvere</option><option value=\"6\">Rägavere</option><option value=\"7\">Saksi</option><option value=\"8\">Sõmeru</option><option value=\"9\">Tamsalu</option><option value=\"10\">Vihula</option><option value=\"11\">Vinni</option><option value=\"12\">Viru-Nigula</option><option value=\"13\">Väike-Maarja</option>";
+	else if(selopt == 8)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Ahja</option><option value=\"2\">Kanepi</option><option value=\"3\">Kõlleste</option><option value=\"4\">Laheda</option><option value=\"5\">Mikitamäe</option><option value=\"6\">Mooste</option><option value=\"7\">Orava</option><option value=\"8\">Põlva</option><option value=\"9\">Räpina</option><option value=\"10\">Valgjärve</option><option value=\"11\">Vastse-Kuuste</option><option value=\"12\">Veriora</option><option value=\"13\">Värska</option>";
+	else if(selopt == 9)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Are</option><option value=\"2\">Audru</option><option value=\"3\">Halinga</option><option value=\"4\">Häädemeeste</option><option value=\"5\">Kihnu</option><option value=\"6\">Koonga</option><option value=\"7\">Lavassaare</option><option value=\"10\">Paikuse</option><option value=\"11\">Saarde</option><option value=\"12\">Sauga</option><option value=\"13\">Surju</option><option value=\"14\">Tahkuranna</option><option value=\"15\">Tali</option><option value=\"16\">Tootsi</option><option value=\"17\">Tori</option><option value=\"18\">Tõstamaa</option><option value=\"19\">Varbla</option><option value=\"20\">Vändra</option>";
+	else if(selopt == 10)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Juuru</option><option value=\"2\">Järvakandi</option><option value=\"3\">Kaiu</option><option value=\"4\">Kehtna</option><option value=\"5\">Kohila</option><option value=\"6\">Käru</option><option value=\"7\">Märjamaa</option><option value=\"8\">Raikküla</option><option value=\"9\">Rapla</option><option value=\"10\">Vigala</option>";
+	else if(selopt == 11)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Kaarma</option><option value=\"2\">Kihelkonna</option><option value=\"3\">Kärla</option><option value=\"4\">Laimjala</option><option value=\"5\">Leisi</option><option value=\"6\">Lümanda</option><option value=\"7\">Muhu</option><option value=\"8\">Mustjala</option><option value=\"9\">Orissaare</option><option value=\"10\">Pihtla</option><option value=\"11\">Pöide</option><option value=\"12\">Ruhnu</option><option value=\"13\">Salme</option><option value=\"14\">Torgu</option><option value=\"15\">Valjala</option>";
+	else if(selopt == 12)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Alatskivi</option><option value=\"2\">Haaslava</option><option value=\"3\">Kambja</option><option value=\"4\">Konguta</option><option value=\"5\">Laeva</option><option value=\"6\">Luunja</option><option value=\"7\">Meeksi</option><option value=\"8\">Mäksa</option><option value=\"9\">Nõo</option><option value=\"10\">Peipsiääre</option><option value=\"11\">Piirissaare</option><option value=\"12\">Puhja</option><option value=\"13\">Rannu</option><option value=\"14\">Rõngu</option><option value=\"15\">Tartu</option><option value=\"16\">Tähtvere</option><option value=\"17\">Vara</option><option value=\"18\">Võnnu</option><option value=\"19\">Ülenurme</option>";
+	else if(selopt == 13)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Helme</option><option value=\"2\">Hummuli</option><option value=\"3\">Karula</option><option value=\"4\">Otepää</option><option value=\"5\">Palupera</option><option value=\"6\">Puka</option><option value=\"7\">Põdrala</option><option value=\"8\">Sangaste</option><option value=\"9\">Taheva</option><option value=\"10\">Tõlliste</option><option value=\"11\">Õru</option>";
+	else if(selopt == 14)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Abja</option><option value=\"2\">Halliste</option><option value=\"3\">Karksi</option><option value=\"4\">Kolga-Jaani</option><option value=\"5\">Kõo</option><option value=\"6\">Kõpu</option><option value=\"7\">Olustvere</option><option value=\"8\">Suure-Jaani</option><option value=\"9\">Tarvastu</option><option value=\"10\">Vastemõisa</option><option value=\"11\">Viljandi</option>";
+	else if(selopt == 15)
+		x.innerHTML="<option value=\"0\">Vald</option><option value=\"1\">Antsla</option><option value=\"2\">Haanja</option><option value=\"3\">Lasva</option><option value=\"4\">Meremäe</option><option value=\"5\">Misso</option><option value=\"6\">Mõniste</option><option value=\"7\">Rõuge</option><option value=\"8\">Sõmerpalu</option><option value=\"9\">Urvaste</option><option value=\"10\">Varstu</option><option value=\"11\">Vastseliina</option><option value=\"12\">Võru</option>";
+	else
+		x.innerHTML="<option value=\"0\">Vald</option>";
 }

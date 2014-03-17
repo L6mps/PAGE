@@ -1,14 +1,14 @@
 ﻿#masthead {
-	min-widht:600px;
+	min-width:600px;
 	margin-left:20%;
-	margin-righ:20%;
+	margin-right:20%;
 	width:60%;
 	background-color:#CCCCCC;
 	text-align:center;
 }
 
 #container {
-	min-width=600px;
+	min-width:600px;
 	position:relative;
 	background-color:aqua;
 	margin-left:20%;
@@ -32,7 +32,12 @@
 	float:left;
 	left:180px;
 	right:0px;
-	
+}
+
+#frame {
+	frameborder:0;
+	border:0;
+	cellspacing=0;
 }
 
 body {

@@ -8,7 +8,7 @@
 
 <body>
 	<header id="masthead">
-		<img src="pilt.jpg" alt="pilt" height="100" width="600">
+		<img src="res/pilt.jpg" alt="pilt" height="100" width="600">
 		<nav>
 			<a href="index.html">Pealeht</a> |
 			<a href="teine.html">Kataloog</a> |
@@ -21,12 +21,12 @@
 		<form>
 			Lisainfo: <input type="search" name="search"><br>
 			<input type="text" id="textInput" value=""><br>
-			Hind: <input type="range" name="price" min="100" max="1000" onchange="updateSlider(this.value)";><br>
+			Hind: <input type="range" name="price" min="100" max="1000" onchange="updateSlider(this.value)"><br>
 			<input type="checkbox" name="attribute1" value="Attribute1">Dementsus<br>
 			<input type="checkbox" name="attribute2" value="Attribute2">Ratastool<br>
 			<input type="checkbox" name="jattribute3" value="Attribute3">Õendusabi<br>
 			<input type="checkbox" name="attribute4" value="Attribute4">Tasuline hooldus<br>
-			<select id="D1" onchange="locations()">
+			<select id="D1" onchange="changeLocation()">
 			  <option value="0">Maakond</option>
 			  <option value="1">Harjumaa</option>
 			  <option value="2">Hiiumaa</option>
@@ -51,11 +51,12 @@
 		</form>
 	</section>
 	<section id="page_content">
-		<iframe id="frame" name="frame" src="main.html" frameborder="0" border="0" cellspacing="0" width="780" height="600"></iframe>
+		<iframe id="frame" name="frame" src="main.html"  width="780" height="600"></iframe>
 	<br>
 	</section>
 	</main>
-	<script src="/js/testscripts.js"></script>
-	<script src="/js/location.js"></script>
+	<script src="./js/location.js"></script>
+	<script src="./js/testscripts.js"></script>
+	
 </body>
 </html>
