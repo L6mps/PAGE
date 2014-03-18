@@ -7,11 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 public class DBProvider {
 	
@@ -35,6 +31,13 @@ public class DBProvider {
 		String pword = "X7CFIewBmXmSeC2GIPuTzB0ytF";
 	
 		private Connection getConnection() throws URISyntaxException, SQLException {
+			try {
+				Class.forName("org.postgresql.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		    URI dbUri = new URI(host);
 
 		    String username = user;
@@ -46,8 +49,13 @@ public class DBProvider {
 		
 		public ResultSet execute(String query) throws SQLException{
 			ResultSet rs = null;
+			PreparedStatement preparedStatement = null;
 			//Statement statement = connection.createStatement();
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			try{
+				preparedStatement = connection.prepareStatement(query);				
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
 			rs = preparedStatement.executeQuery();
 			return rs;
 		}
