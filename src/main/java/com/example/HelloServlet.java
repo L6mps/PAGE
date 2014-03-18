@@ -3,6 +3,8 @@ package com.example;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.logging.Logger;
 
@@ -19,8 +21,24 @@ public class HelloServlet extends HttpServlet {
 
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {		
+            throws ServletException, IOException {
+		DBProvider dbtesting = new DBProvider();
+		ResultSet rs = null;
         ServletOutputStream out = resp.getOutputStream();
+        try {
+			rs = dbtesting.execute("select * from Generalinfo");
+		} catch (SQLException e) {
+			out.write(("Database query failed. Message : " + e.getMessage()).getBytes());
+			
+		}
+        if(rs!=null){
+        	try {
+				out.write((rs.getArray(1).toString()).getBytes());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
         Enumeration enums = req.getAttributeNames();
         ServletInputStream inp = req.getInputStream();
         String tere = req.getParameter("tere");
