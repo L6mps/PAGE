@@ -3,3 +3,4 @@ $(document).ready(function(){
 		$('#textInput').text($('#price').val());
 	});
 });
+
