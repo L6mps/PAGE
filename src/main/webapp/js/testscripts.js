@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$('#price').on('change', function(){
-		$('#textInput').text($('#price').val());
+		$('#textInput').attr('value', $('#price').val());
 	});
 });
 
