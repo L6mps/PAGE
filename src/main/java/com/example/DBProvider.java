@@ -34,13 +34,13 @@ public class DBProvider {
 		int port = 5432;
 		String pword = "X7CFIewBmXmSeC2GIPuTzB0ytF";
 	
-		private static Connection getConnection() throws URISyntaxException, SQLException {
-		    URI dbUri = new URI(System.getenv("DATABASE_URL"));
+		private Connection getConnection() throws URISyntaxException, SQLException {
+		    URI dbUri = new URI(host);
 
-		    String username = dbUri.getUserInfo().split(":")[0];
-		    String password = dbUri.getUserInfo().split(":")[1];
+		    String username = user;
+		    String password = pword;
 		    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
+		    
 		    return DriverManager.getConnection(dbUrl, username, password);
 		}
 		
@@ -49,7 +49,6 @@ public class DBProvider {
 			//Statement statement = connection.createStatement();
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			rs = preparedStatement.executeQuery();
-			preparedStatement.close();
 			return rs;
 		}
 		
