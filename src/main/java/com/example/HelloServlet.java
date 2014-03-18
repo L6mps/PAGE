@@ -34,7 +34,12 @@ public class HelloServlet extends HttpServlet {
 		}
         if(rs!=null){
         	try {
-				out.write(("Data received:" + rs.getString(1)).getBytes());
+        		while(rs.next()){
+        			int id = rs.getInt(1);
+        			String name = rs.getString(2);
+        			int price = rs.getInt(5);
+        			out.write(("ID: "+id+";Name: "+name+";Price: "+price+"\n").getBytes());
+        		}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
