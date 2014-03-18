@@ -3,6 +3,7 @@ package com.example;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Enumeration;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -20,6 +21,7 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {		
         ServletOutputStream out = resp.getOutputStream();
+        Enumeration enums = req.getAttributeNames();
         ServletInputStream inp = req.getInputStream();
         String tere = req.getParameter("tere");
 //      byte[] arr = new byte[255];
@@ -27,7 +29,10 @@ public class HelloServlet extends HttpServlet {
 //        out.write(("Bytes read: " + j + "; reading : " + arr.toString()).getBytes());
         //resp.sendRedirect("http://www.google.com");
         out.write("Hello PAGE\n".getBytes());
-        out.write(("tere-param received :" + tere).getBytes());
+        out.write(("tere-param received :" + tere+"\n").getBytes());
+        while(enums.hasMoreElements()){
+        	out.write((enums.nextElement().toString()).getBytes());
+        }
         out.flush();
         out.close();
 	}
