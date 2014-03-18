@@ -47,18 +47,10 @@ public class HelloServlet extends HttpServlet {
         } else {
         	out.write(("SQL Statement failed.").getBytes());
         }
-        Enumeration enums = req.getAttributeNames();
-        ServletInputStream inp = req.getInputStream();
         String tere = req.getParameter("tere");
-//      byte[] arr = new byte[255];
-//        int j = inp.read(arr, 0, 255);
-//        out.write(("Bytes read: " + j + "; reading : " + arr.toString()).getBytes());
-        //resp.sendRedirect("http://www.google.com");
+
         out.write("Hello PAGE\n".getBytes());
         out.write(("tere-param received :" + tere+"\n").getBytes());
-        while(enums.hasMoreElements()){
-        	out.write((enums.nextElement().toString()).getBytes());
-        }
         out.flush();
         out.close();
 	}
