@@ -1,8 +1,5 @@
-$('#price').on('change', function(){
-    $('#textInput').val($('#price').val());
-});
-
-
-$('#textInput').on('change', function(){
-	$('#price').val($('#textInput').val());
+$(document).ready(function(){
+	$('#price').on('change', function(){
+		$('#textInput').text($('#price').val());
+	});
 });

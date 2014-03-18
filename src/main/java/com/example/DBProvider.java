@@ -37,10 +37,7 @@ public class DBProvider {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*
-		    URI dbUri = new URI(host);
-		    String username = user;
-		    String password = pword; */
+			
 		    String url = "jdbc:postgresql://ec2-107-20-191-205.compute-1.amazonaws.com:5432/d146m591db0oro?user=wtqukymzogogqu&password=X7CFIewBmXmSeC2GIPuTzB0ytF&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
 		    Connection conn = DriverManager.getConnection(url);
 		    
