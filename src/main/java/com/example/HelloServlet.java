@@ -34,7 +34,7 @@ public class HelloServlet extends HttpServlet {
 		}
         if(rs!=null){
         	try {
-				out.write(("Data received:" + rs.getArray(1).toString()).getBytes());
+				out.write(("Data received:" + rs.getString(1)).getBytes());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
