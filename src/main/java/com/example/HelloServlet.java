@@ -27,17 +27,20 @@ public class HelloServlet extends HttpServlet {
         ServletOutputStream out = resp.getOutputStream();
         try {
 			rs = dbtesting.execute("select * from Generalinfo");
+			
 		} catch (SQLException e) {
 			out.write(("Database query failed. Message : " + e.getMessage()).getBytes());
 			
 		}
         if(rs!=null){
         	try {
-				out.write((rs.getArray(1).toString()).getBytes());
+				out.write(("Data received:" + rs.getArray(1).toString()).getBytes());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+        } else {
+        	out.write(("SQL Statement failed.").getBytes());
         }
         Enumeration enums = req.getAttributeNames();
         ServletInputStream inp = req.getInputStream();
