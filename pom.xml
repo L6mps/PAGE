@@ -38,7 +38,8 @@
             <artifactId>jsp-2.1-glassfish</artifactId>
             <version>2.1.v20100127</version>
         </dependency>
-		<!--- Spring framework --->
+        
+		<!-- Spring framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -56,7 +57,7 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>4.0.2.RELEASE</version>
 		</dependency>
-		<!--- Json --->
+		<!-- Json -->
         <dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
@@ -68,7 +69,9 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-		<!--- Database tools --->
+        
+		<!-- Database tools -->
+		
         <dependency>
         	<groupId>commons-dbcp</groupId>
         	<artifactId>commons-dbcp</artifactId>
@@ -98,13 +101,13 @@
 			<artifactId>ext-js</artifactId>
 			<version>3.4.0</version>
 		</dependency>
-		<!--- Gson --->
+		<!-- Gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
 		</dependency>
-		<!--- Velocity --->
+		<!-- Velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
