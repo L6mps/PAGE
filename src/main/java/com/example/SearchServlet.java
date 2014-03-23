@@ -1,22 +1,50 @@
 package com.example;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SearchServlet extends HttpServlet{
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+
+public class SearchServlet extends HttpServlet {
+	private VelocityEngine engine = new VelocityEngine();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException{
-		
-		
+			throws ServletException, IOException {
+		StringWriter sw = new StringWriter();
+		VelocityContext context = new VelocityContext();
+		Template temp = null;		
+		temp = Velocity.getTemplate("./src/main/webapp/html/template-velocity.html", "UTF-8");
+
+		temp.merge(context, sw);
+		PrintWriter write = resp.getWriter();
+		write.println(sw);
+
 	}
-	
-	@Override protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException{
-		
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		engine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		engine.setProperty("classpath.resource.loader.class",
+				ClasspathResourceLoader.class.getName());
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
 	}
 }

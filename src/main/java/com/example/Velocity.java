@@ -44,10 +44,11 @@ public class Velocity extends HttpServlet{
         getTemplate(req).merge(context, resp.getWriter());
     }
 
-    private Template getTemplate(HttpServletRequest req) {
+    public Template getTemplate(HttpServletRequest req) {
         return engine.getTemplate(req.getRequestURI(), "UTF-8");
     }
-	
+
+    
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{
