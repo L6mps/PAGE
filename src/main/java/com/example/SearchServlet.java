@@ -30,7 +30,7 @@ public class SearchServlet extends HttpServlet {
 		VelocityContext context = new VelocityContext();
 		Template temp = null;		
 		try{
-			temp = Velocity.getTemplate("./src/main/webapp/html/template-velocity.html", "UTF-8");
+			temp = Velocity.getTemplate("html/template-velocity.html", "UTF-8");
 		}
 		catch( ResourceNotFoundException rnfe )
 		{
@@ -49,21 +49,23 @@ public class SearchServlet extends HttpServlet {
 		  // threw an exception
 		}
 		catch( Exception e )
-		{}
+		{
+			e.printStackTrace();
+		}
 		context.put("helloworld", 5);
 		temp.merge(context, sw);
 		PrintWriter write = resp.getWriter();
 		write.println(sw);
 
 	}
-
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		engine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-		engine.setProperty("classpath.resource.loader.class",
-				ClasspathResourceLoader.class.getName());
-	}
+        super.init(config);
+        String path = config.getServletContext().getRealPath("/");
+        System.out.println(path);
+        engine.addProperty("file.resource.loader.path", path);
+        engine.init();
+    }
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
