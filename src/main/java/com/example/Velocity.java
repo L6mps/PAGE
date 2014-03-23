@@ -13,12 +13,15 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-public class Velocity extends HttpServlet{
-	
-	private VelocityEngine engine = new VelocityEngine();
+public class Velocity extends HttpServlet {
 
-	
-	@Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private VelocityEngine engine;
+
+    @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         engine = createTemplateEngine(config.getServletContext());
@@ -44,15 +47,8 @@ public class Velocity extends HttpServlet{
         getTemplate(req).merge(context, resp.getWriter());
     }
 
-    public Template getTemplate(HttpServletRequest req) {
+    private Template getTemplate(HttpServletRequest req) {
         return engine.getTemplate(req.getRequestURI(), "UTF-8");
     }
 
-    
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException{
-		
-	}
-	
 }

@@ -14,6 +14,9 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
@@ -26,8 +29,28 @@ public class SearchServlet extends HttpServlet {
 		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
 		Template temp = null;		
-		temp = Velocity.getTemplate("./src/main/webapp/html/template-velocity.html", "UTF-8");
-
+		try{
+			temp = Velocity.getTemplate("./src/main/webapp/html/template-velocity.html", "UTF-8");
+		}
+		catch( ResourceNotFoundException rnfe )
+		{
+			rnfe.printStackTrace();
+		   // couldn't find the template
+		}
+		catch( ParseErrorException pee )
+		{
+			pee.printStackTrace();
+		  // syntax error: problem parsing the template
+		}
+		catch( MethodInvocationException mie )
+		{
+			mie.printStackTrace();
+		  // something invoked in the template
+		  // threw an exception
+		}
+		catch( Exception e )
+		{}
+		context.put("helloworld", 5);
 		temp.merge(context, sw);
 		PrintWriter write = resp.getWriter();
 		write.println(sw);
