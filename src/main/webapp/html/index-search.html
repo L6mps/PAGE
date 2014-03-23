@@ -1,14 +1,7 @@
-﻿<div id="left_col">
+﻿<div id="mainsearch">
 		<form>
-			Lisainfo: <input type="search" name="search"><br>
-			<input type="text" id="textInput" value=""><br>
-			Hind: <input type="range" id="price" name="price" min="100" max="1000"><br>
-			<input type="checkbox" name="demented" value="1">Dementsus<br>
-			<input type="checkbox" name="wheelchair" value="1">Ratastool<br>
-			<input type="checkbox" name="nursing" value="1">Õendusabi<br>
-			<input type="checkbox" name="paidservices" value="1">Tasuline hooldus<br>
 			<select id="D1" onchange="changeLocation()">
-			  <option value="0">Kõik maakonnad</option>
+			  <option value="0">Maakond</option>
 			  <option value="1">Harjumaa</option>
 			  <option value="2">Hiiumaa</option>
 			  <option value="3">Ida-Virumaa</option>
@@ -24,11 +17,12 @@
 			  <option value="13">Valgamaa</option>
 			  <option value="14">Viljandimaa</option>
 			  <option value="15">Võrumaa</option>
-			</select><br>
+			</select>
 			<select id="D2">
-			  <option value="0">Kõik vallad</option>
-			</select><br>
-			<a href="search.html" target="frame">Submit</a>
+			  <option value="0">Vald</option>
+			</select>
+			Dementsus<input type="checkbox" name="demented" value="1">
+			Hind: <input type="range" id="price" name="price" min="100" max="1000">
 			<button type="submit" id="jqsubmit" formaction="/search">JQuerySubmit</button>
 		</form>
 	</div>
