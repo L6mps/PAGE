@@ -1,25 +1,25 @@
 package com.example;
 
-import java.io.IOException;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+// process all requested html files with velocity templating engine
+// https://velocity.apache.org/engine/releases/velocity-1.7
+// https://velocity.apache.org/engine/releases/velocity-1.7/user-guide.html
+@WebServlet(value = "*.html")
 public class Velocity extends HttpServlet {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private VelocityEngine engine;
+    private VelocityEngine engine;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +22,25 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 public class SearchServlet extends HttpServlet {
-	private VelocityEngine engine = new VelocityEngine();
+	private VelocityEngine engine;
 
+	private VelocityEngine createVelocityEngine(ServletContext cont){
+		String path = cont.getRealPath("/");
+        System.out.println(path);
+        engine = new VelocityEngine();
+        engine.addProperty("file.resource.loader.path", path);
+        engine.init();
+		return engine;
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
-		Template temp = null;		
+		Template temp = null;
 		try{
-			temp = Velocity.getTemplate("html/template-velocity.html", "UTF-8");
+			temp = engine.getTemplate("html/template-velocity.html", "UTF-8");
 		}
 		catch( ResourceNotFoundException rnfe )
 		{
@@ -61,10 +71,7 @@ public class SearchServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        String path = config.getServletContext().getRealPath("/");
-        System.out.println(path);
-        engine.addProperty("file.resource.loader.path", path);
-        engine.init();
+        engine = createVelocityEngine(config.getServletContext());
     }
 
 	@Override
