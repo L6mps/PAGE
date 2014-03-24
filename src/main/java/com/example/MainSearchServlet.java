@@ -21,7 +21,7 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-public class SearchServlet extends HttpServlet {
+public class MainSearchServlet extends HttpServlet {
 	private VelocityEngine engine;
 
 	private VelocityEngine createVelocityEngine(ServletContext cont){
@@ -40,7 +40,7 @@ public class SearchServlet extends HttpServlet {
 		VelocityContext context = new VelocityContext();
 		Template temp = null;
 		try{
-			temp = engine.getTemplate("search.html", "UTF-8");
+			temp = engine.getTemplate("html/template-velocity.html", "UTF-8");
 		}
 		catch( ResourceNotFoundException rnfe )
 		{
