@@ -1,5 +1,5 @@
 <div id="mainsearch">
-		<form>
+		<form id="form">
 			<select id="D1" onchange="changeLocation()">
 			  <option value="0">Maakond</option>
 			  <option value="1">Harjumaa</option>
@@ -21,8 +21,8 @@
 			<select id="D2">
 			  <option value="0">Vald</option>
 			</select>
-			Dementsus<input type="checkbox" name="demented" value="1">
-			Hind: <input type="range" id="price" name="price" min="100" max="1000">
+			Dementsus<input type="checkbox" id="demented" value="1">
+			Hind: <input type="text" id="textInput" value=""><input type="range" id="price" name="price" min="100" max="1000">
 			<button type="submit" id="jqsubmit" formaction="/search">JQuerySubmit</button>
 		</form>
 	</div>
