@@ -27,6 +27,19 @@ public class SearchEngine {
 	}
 	
 	private void mapSelections(){
+		ResultSet rs;
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT * FROM resultSummary ");
+		for(int i = 0; i<4; i++)
+			if(selectedParams[i])
+				sb.append("INNER JOIN service" + i + " ON (resultSummary.id = service"+i+".id) ");
+		//Just append other params to sb with WHERE somethingsomething = somethingother
+		try {
+			rs = dbengine.execute(sb.toString())
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		/*
 		ArrayList<ResultSet> resultsets = new ArrayList<ResultSet>();
 		ArrayList<Set<Integer>> comparingSets = new ArrayList<Set<Integer>>();
 		for(int i=0;i<4; i++){
@@ -78,5 +91,5 @@ public class SearchEngine {
 		if(paramKeys.contains("paidservices")){
 			selectedParams[3]=true;
 		}
-	}
+	}*/
 }
