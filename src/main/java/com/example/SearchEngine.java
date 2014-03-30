@@ -24,21 +24,33 @@ public class SearchEngine {
 		remapKeys(params);
 		dbengine = new DBProvider();
 		this.mappedParameters = paramMap;
+		retrievedItems = mapSelections();
 	}
 	
-	private void mapSelections(){
+	public ArrayList<Item> getItems(){
+		return this.retrievedItems;
+	}
+	
+	private ArrayList<Item> mapSelections(){
 		ResultSet rs;
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM resultSummary ");
+		ArrayList<Item> items = new ArrayList<Item>();
 		for(int i = 0; i<4; i++)
 			if(selectedParams[i])
-				sb.append("INNER JOIN service" + i + " ON (resultSummary.id = service"+i+".id) ");
+				sb.append("INNER JOIN service" + (i+1) + " ON (resultSummary.id = service"+(i+1)+".id) ");
 		//Just append other params to sb with WHERE somethingsomething = somethingother
 		try {
-			rs = dbengine.execute(sb.toString())
+			rs = dbengine.execute(sb.toString());
+			while(rs.next()){
+				Item item = new Item(rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4));
+				items.add(item);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return items;
+	}
 		/*
 		ArrayList<ResultSet> resultsets = new ArrayList<ResultSet>();
 		ArrayList<Set<Integer>> comparingSets = new ArrayList<Set<Integer>>();
@@ -69,11 +81,13 @@ public class SearchEngine {
 				comparingSets.get(i-1).retainAll(comparingSets.get(i));
 			}
 		}
-	}
+	}*/
 	
 	private void remapKeys(Enumeration<String> params){
 		while(params.hasMoreElements()){
-			paramKeys.add(params.nextElement());
+			String item = params.nextElement();
+			System.out.println(item);
+			paramKeys.add(item);
 		}
 		initSelections();
 	}
@@ -91,5 +105,5 @@ public class SearchEngine {
 		if(paramKeys.contains("paidservices")){
 			selectedParams[3]=true;
 		}
-	}*/
+	}
 }

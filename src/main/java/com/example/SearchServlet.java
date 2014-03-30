@@ -1,6 +1,8 @@
 package com.example;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -20,6 +22,7 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.json.JSONObject;
 
 public class SearchServlet extends HttpServlet {
 	private VelocityEngine engine;
@@ -36,8 +39,10 @@ public class SearchServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
 		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
+		System.out.println(req.getParameter("price"));
 		Template temp = null;
 		try{
 			temp = engine.getTemplate("search.html", "UTF-8");
@@ -77,6 +82,9 @@ public class SearchServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		resp.getWriter().write("Tere");
+		System.out.println("POST INVOKED");
+		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+		System.out.println(br.readLine());
+		
 	}
 }
