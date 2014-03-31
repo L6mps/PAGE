@@ -1,6 +1,6 @@
 ﻿package com.example;
 
-public class Item {
+public class Item extends Object{
 	private String name;
 	private int price;
 	private String loc1;
@@ -41,17 +41,8 @@ public class Item {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getLoc1() {
+	public String getLoc1() {
 		return loc1;
-	}
-	public void setLoc1(int loc1) {
-		this.loc1 = loc1;
-	}
-	public int getLoc2() {
-		return loc2;
-	}
-	public void setLoc2(int loc2) {
-		this.loc2 = loc2;
 	}
 	public String[] getAdditionals() {
 		return additionals;
@@ -89,7 +80,7 @@ public class Item {
 					case 16: loc2="Vasalemma vald"; break;
 					case 17: loc2="Viimsi vald"; break;
 				}
-				break;
+				break;}
 			case 2: {
 				loc1 = "Hiiu maakond";
 				switch(l2) {
@@ -108,17 +99,17 @@ public class Item {
 					case 3: loc2="Avinurme vald"; break;
 					case 4: loc2="Iisaku vald"; break;
 					case 5: loc2="Illuka vald"; break;
-					case 5: loc2="Jõhvi vald"; break;
-					case 6: loc2="Kohtla vald"; break;
-					case 7: loc2="Kohtla-Nõmme vald"; break;
-					case 8: loc2="Lohusuu vald"; break;
-					case 9: loc2="Lüganuse vald"; break;
-					case 10: loc2="Maidla vald"; break;
-					case 11: loc2="Mäetaguse vald"; break;
-					case 12: loc2="Sonda vald"; break;
-					case 13: loc2="Toila vald"; break;
-					case 14: loc2="Tudulinna vald"; break;
-					case 15: loc2="Vaivara vald"; break;
+					case 6: loc2="Jõhvi vald"; break;
+					case 7: loc2="Kohtla vald"; break;
+					case 8: loc2="Kohtla-Nõmme vald"; break;
+					case 9: loc2="Lohusuu vald"; break;
+					case 10: loc2="Lüganuse vald"; break;
+					case 11: loc2="Maidla vald"; break;
+					case 12: loc2="Mäetaguse vald"; break;
+					case 13: loc2="Sonda vald"; break;
+					case 14: loc2="Toila vald"; break;
+					case 15: loc2="Tudulinna vald"; break;
+					case 16: loc2="Vaivara vald"; break;
 				}
 				break;
 			}
@@ -137,6 +128,7 @@ public class Item {
 					case 10: loc2="Torma vald"; break;
 				}
 				break;
+			}
 			case 5: {
 				loc1 = "Järva maakond";
 				switch(l2) {

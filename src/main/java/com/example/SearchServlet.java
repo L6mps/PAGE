@@ -67,7 +67,13 @@ public class SearchServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-		Item[] items = (Item[]) searchEngine.getItems().toArray();
+		Item[] items = new Item[searchEngine.getItems().size()];
+		System.out.println(searchEngine.getItems().size());
+		int i=0;
+		for(Item item:searchEngine.getItems()){
+			items[i]=item;
+			i++;
+		}
 		context.put("results", items);
 		temp.merge(context, sw);
 		PrintWriter write = resp.getWriter();
