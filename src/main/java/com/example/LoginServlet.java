@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 class LoginServlet extends HttpServlet {
 	
-	DBProvider dbprovider = new DBProvider();
-	
+	DBProvider dbprovider;
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+		dbprovider = new DBProvider();
 		String output = "";
 		try{		
 			String action = request.getParameter("action");
@@ -46,7 +47,7 @@ class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		outWriter.println(output);
 		outWriter.close();
-
+		dbprovider.closeConn();
 	}
 	private String checkCachedSession(String user, String checkableSessionId){		
 		return null;

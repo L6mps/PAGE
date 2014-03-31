@@ -47,6 +47,8 @@ public class SearchEngine {
 				Item item = new Item(rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4));
 				items.add(item);
 			}
+			rs.close();
+			dbengine.closeConn();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
