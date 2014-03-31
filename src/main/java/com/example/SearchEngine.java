@@ -89,15 +89,6 @@ public class SearchEngine {
 			String item = params.nextElement();
 			System.out.println(item);
 			paramKeys.add(item);
-			if(paramKeys.contains("price")){
-				this.price = Integer.valueOf(paramKeys.get(paramKeys.indexOf("price")));
-			}
-			if(paramKeys.contains("D1")){
-				this.loc1 = Integer.valueOf(paramKeys.get(paramKeys.indexOf("D1")));
-			}
-			if(paramKeys.contains("D2")){
-				this.loc2 = Integer.valueOf(paramKeys.get(paramKeys.indexOf("D2")));
-			}
 		}
 		initSelections();
 	}
