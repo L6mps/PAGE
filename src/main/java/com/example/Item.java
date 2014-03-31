@@ -1,28 +1,52 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item extends Object{
 	private String name;
 	private int price;
 	private String loc1;
 	private String loc2;
 	private String[] additionals;
-	private int mainopts;
 	public Item(String name, int price, int loc1, int loc2, int mainopts) {
 		super();
 		this.name = name;
 		this.price = price;
-		this.additionals = null;
 		locToString(loc1, loc2);
-		this.mainopts = mainopts;
+		addAdditionals(mainopts);
 		generateBinary();
 	}
 	
+	private void addAdditionals(int mainopts) {
+		List<String> temp=new ArrayList<String>();
+		if(mainopts >= 8) {
+			temp.add("Paid services");
+			mainopts-=8;
+		}
+		if(mainopts >= 4) {
+			temp.add("Nursing");
+			mainopts-=4;
+		}
+		if(mainopts >= 2) {
+			temp.add("Wheelchair");
+			mainopts-=2;
+		}
+		if(mainopts >= 1) {
+			temp.add("Demented");
+		}
+		additionals=new String[temp.size()];
+		temp.toArray(additionals);
+		
+	}
+
 	public Item(String name, int price, int loc1, int loc2) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.additionals = null;
 		locToString(loc1, loc2);
+		
 		System.out.println(this.loc2+" "+this.loc1);
 	}
 
@@ -54,13 +78,6 @@ public class Item extends Object{
 	public void setAdditionals(String[] additionals) {
 		this.additionals = additionals;
 	}
-	public int getMainopts() {
-		return mainopts;
-	}
-	public void setMainopts(int mainopts) {
-		this.mainopts = mainopts;
-	}
-	
 	private void locToString(int l1, int l2) {
 		switch(l1) {
 			case 1: { 
