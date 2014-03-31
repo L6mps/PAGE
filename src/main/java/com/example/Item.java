@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item extends Object{
 	private String name;
 	private int price;
@@ -8,36 +11,32 @@ public class Item extends Object{
 	private String[] additionals;
 	public Item(String name, int price, int loc1, int loc2, int mainopts) {
 		super();
-		additionals = new String[4];
 		this.name = name;
 		this.price = price;
-		this.additionals = null;
 		locToString(loc1, loc2);
 		addAdditionals(mainopts);
 		generateBinary();
 	}
 	
 	private void addAdditionals(int mainopts) {
-		int i=0;
+		List<String> temp=new ArrayList<String>();
 		if(mainopts >= 8) {
-			additionals[i]="Paid services";
+			temp.add("Paid services");
 			mainopts-=8;
-			i++;
 		}
 		if(mainopts >= 4) {
-			additionals[i]="Nursing";
+			temp.add("Nursing");
 			mainopts-=4;
-			i++;
 		}
 		if(mainopts >= 2) {
-			additionals[i]="Wheelchair";
+			temp.add("Wheelchair");
 			mainopts-=2;
-			i++;
 		}
 		if(mainopts >= 1) {
-			additionals[i]="Demented";
+			temp.add("Demented");
 		}
-
+		additionals=new String[temp.size()];
+		temp.toArray(additionals);
 		
 	}
 
@@ -79,13 +78,6 @@ public class Item extends Object{
 	public void setAdditionals(String[] additionals) {
 		this.additionals = additionals;
 	}
-	public int getMainopts() {
-		return mainopts;
-	}
-	public void setMainopts(int mainopts) {
-		this.mainopts = mainopts;
-	}
-	
 	private void locToString(int l1, int l2) {
 		switch(l1) {
 			case 1: { 

@@ -44,7 +44,7 @@ public class SearchEngine {
 		try {
 			rs = dbengine.execute(sb.toString());
 			while(rs.next()){
-				Item item = new Item(rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4));
+				Item item = new Item(rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4), rs.getInt(6));
 				items.add(item);
 			}
 		} catch (SQLException e) {
@@ -89,7 +89,7 @@ public class SearchEngine {
 			String item = params.nextElement();
 			System.out.println(item);
 			paramKeys.add(item);
-			if(paramKeys.contains("price")){
+			/*if(paramKeys.contains("price")){
 				this.price = Integer.valueOf(paramKeys.get(paramKeys.indexOf("price")));
 			}
 			if(paramKeys.contains("D1")){
@@ -97,7 +97,7 @@ public class SearchEngine {
 			}
 			if(paramKeys.contains("D2")){
 				this.loc2 = Integer.valueOf(paramKeys.get(paramKeys.indexOf("D2")));
-			}
+			}*/
 		}
 		initSelections();
 	}
