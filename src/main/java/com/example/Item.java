@@ -6,23 +6,48 @@ public class Item extends Object{
 	private String loc1;
 	private String loc2;
 	private String[] additionals;
-	private int mainopts;
 	public Item(String name, int price, int loc1, int loc2, int mainopts) {
 		super();
+		additionals = new String[4];
 		this.name = name;
 		this.price = price;
 		this.additionals = null;
 		locToString(loc1, loc2);
-		this.mainopts = mainopts;
+		addAdditionals(mainopts);
 		generateBinary();
 	}
 	
+	private void addAdditionals(int mainopts) {
+		int i=0;
+		if(mainopts >= 8) {
+			additionals[i]="Paid services";
+			mainopts-=8;
+			i++;
+		}
+		if(mainopts >= 4) {
+			additionals[i]="Nursing";
+			mainopts-=4;
+			i++;
+		}
+		if(mainopts >= 2) {
+			additionals[i]="Wheelchair";
+			mainopts-=2;
+			i++;
+		}
+		if(mainopts >= 1) {
+			additionals[i]="Demented";
+		}
+
+		
+	}
+
 	public Item(String name, int price, int loc1, int loc2) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.additionals = null;
 		locToString(loc1, loc2);
+		
 		System.out.println(this.loc2+" "+this.loc1);
 	}
 
