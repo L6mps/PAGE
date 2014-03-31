@@ -133,22 +133,6 @@
 				<version>8.1.14.v20131031</version>
 				<configuration>
 					<scanIntervalSeconds>2</scanIntervalSeconds>
-					<webApp>
-						<contextPath>/test</contextPath>
-						<tempDirectory>${project.build.directory}/work</tempDirectory>
-						<sessionHandler implementation="org.eclipse.jetty.server.session.SessionHandler">
-							<sessionManager
-								implementation="org.eclipse.jetty.server.session.HashSessionManager">
-								<storeDirectory>${basedir}/target/sessions</storeDirectory>
-							</sessionManager>
-						</sessionHandler>
-					</webApp>
-					<loginServices>
-						<loginService implementation="org.eclipse.jetty.security.HashLoginService">
-							<name>Test Realm</name>
-							<config>src/main/config/demo-base/etc/realm.properties</config>
-						</loginService>
-					</loginServices>
 				</configuration>
 			</plugin>
 			<plugin>

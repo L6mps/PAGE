@@ -35,20 +35,6 @@
 	</servlet-mapping>
 
 
-	<security-constraint>
-		<web-resource-collection>
-			<url-pattern>/add</url-pattern>      <!--The url that should be protected -->
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>admin</role-name>       <!--The required roles for accessing the url -->
-			<role-name>user</role-name>
-			<role-name>moderator</role-name>
-		</auth-constraint>
-	</security-constraint>
-
-	<login-config>
-		<auth-method>BASIC</auth-method>     <!-- Use http basic authentication -->
-		<realm-name>Test Realm</realm-name>  <!-- Users are defined in this realm -->
-	</login-config>
+	
 
 </web-app>
