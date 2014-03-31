@@ -1,4 +1,4 @@
-﻿package com.example;
+package com.example;
 
 public class Item extends Object{
 	private String name;
@@ -23,6 +23,7 @@ public class Item extends Object{
 		this.price = price;
 		this.additionals = null;
 		locToString(loc1, loc2);
+		System.out.println(this.loc2+" "+this.loc1);
 	}
 
 	private void generateBinary(){
@@ -43,6 +44,9 @@ public class Item extends Object{
 	}
 	public String getLoc1() {
 		return loc1;
+	}
+	public String getLoc2() {
+		return loc2;
 	}
 	public String[] getAdditionals() {
 		return additionals;
