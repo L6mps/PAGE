@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/java/com/example/SearchServlet.java=ISO-8859-1
+encoding//src/main/webapp/html/head.html=UTF-8
+encoding//src/main/webapp/html/template-velocity.html=UTF-8
 encoding/<project>=UTF-8

@@ -1,8 +1,6 @@
 package com.example;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -22,9 +20,8 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-import org.json.JSONObject;
 
-public class SearchServlet extends HttpServlet {
+public class MainSearchServlet extends HttpServlet {
 	private VelocityEngine engine;
 
 	private VelocityEngine createVelocityEngine(ServletContext cont){
@@ -42,10 +39,9 @@ public class SearchServlet extends HttpServlet {
 		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
 		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
-		System.out.println(req.getParameter("price"));
 		Template temp = null;
 		try{
-			temp = engine.getTemplate("search.html", "UTF-8");
+			temp = engine.getTemplate("html/template-velocity.html", "UTF-8");
 		}
 		catch( ResourceNotFoundException rnfe )
 		{
@@ -67,14 +63,7 @@ public class SearchServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-		Item[] items = new Item[searchEngine.getItems().size()];
-		System.out.println(searchEngine.getItems().size());
-		int i=0;
-		for(Item item:searchEngine.getItems()){
-			items[i]=item;
-			i++;
-		}
-		context.put("results", items);
+		context.put("helloworld", 5);
 		temp.merge(context, sw);
 		PrintWriter write = resp.getWriter();
 		write.println(sw);
@@ -89,9 +78,6 @@ public class SearchServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		System.out.println("POST INVOKED");
-		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
-		System.out.println(br.readLine());
-		
+
 	}
 }

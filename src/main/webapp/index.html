@@ -1,64 +1,11 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link href="index.css" rel="stylesheet" type="text/css" />
-<title>Pageproject</title>
+#include("html/head.html")
 </head>
 
-<body>
-	<header id="masthead">
-		<img src="res/pilt.jpg" alt="pilt" height="100" width="600">
-		<nav>
-			<a href="index.html">Pealeht</a> |
-			<a href="teine.html">Kataloog</a> |
-			<a href="kolmas.html">Teenused</a> |
-			<a href="neljas.html">Abi</a>
-		</nav>
-	</header>
-	<main id="container">
-	<section id="left_col">
-		<form>
-			Lisainfo: <input type="search" name="search"><br>
-			<input type="text" id="textInput" value=""><br>
-			Hind: <input type="range" id="price" name="price" min="100" max="1000"><br>
-			<input type="checkbox" name="demented" value="1">Dementsus<br>
-			<input type="checkbox" name="wheelchair" value="1">Ratastool<br>
-			<input type="checkbox" name="nursing" value="1">Õendusabi<br>
-			<input type="checkbox" name="paidservices" value="1">Tasuline hooldus<br>
-			<select id="D1" onchange="changeLocation()">
-			  <option value="0">Maakond</option>
-			  <option value="1">Harjumaa</option>
-			  <option value="2">Hiiumaa</option>
-			  <option value="3">Ida-Virumaa</option>
-			  <option value="4">Jõgevamaa</option>
-			  <option value="5">Järvamaa</option>
-			  <option value="6">Läänemaa</option>
-			  <option value="7">Lääne-Virumaa</option>
-			  <option value="8">Põlvamaa</option>
-			  <option value="9">Pärnumaa</option>
-			  <option value="10">Raplamaa</option>
-			  <option value="11">Saaremaa</option>
-			  <option value="12">Tartumaa</option>
-			  <option value="13">Valgamaa</option>
-			  <option value="14">Viljandimaa</option>
-			  <option value="15">Võrumaa</option>
-			</select><br>
-			<select id="D2">
-			  <option value="0">Vald</option>
-			</select><br>
-			<a href="search.html" target="frame">Submit</a>
-			<button type="submit" id="jqsubmit" formaction="/search">JQuerySubmit</button>
-		</form>
-	</section>
-	<section id="page_content">
-		<iframe id="frame" name="frame" src="main.html"  width="780" height="600"></iframe>
-	<br>
-	</section>
-	</main>
-	<script src="/js/jquery-2.1.0.js"></script>
-	<script src="/js/location.js"></script>
-	<script src="/js/testscripts.js"></script>
-	
+<body class="main">
+	#include("html/header.html")
+	#include("html/index-search.html")
 </body>
 </html>

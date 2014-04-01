@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -24,9 +25,12 @@ public class HelloServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		DBProvider dbtesting = new DBProvider();
 		ResultSet rs = null;
+		UUID uid = UUID.randomUUID();
 		ServletOutputStream out = resp.getOutputStream();
+		out.write((uid.toString()+"\n").getBytes());
 		try {
 			rs = dbtesting.execute("select * from Generalinfo");
 

@@ -1,0 +1,12 @@
+﻿TABLES:
+generalInfo
+service1
+service2
+service3
+service4
+users
+
+VIEWS:
+resultSummary
+resultFull
+locationStatistics
