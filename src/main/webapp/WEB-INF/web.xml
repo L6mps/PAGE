@@ -20,6 +20,10 @@
 		<servlet-name>main</servlet-name>
 		<servlet-class>com.example.MainSearchServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Velocity</servlet-name>
+		<servlet-class>com.example.Velocity</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>hello</servlet-name>
@@ -32,5 +36,9 @@
 	<servlet-mapping>
 		<servlet-name>main</servlet-name>
 		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Velocity</servlet-name>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 </web-app>
