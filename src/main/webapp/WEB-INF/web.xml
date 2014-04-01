@@ -17,6 +17,10 @@
 		<servlet-class>com.example.SearchServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>submit</servlet-name>
+		<servlet-class>com.example.SubmitServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>main</servlet-name>
 		<servlet-class>com.example.MainSearchServlet</servlet-class>
 	</servlet>
@@ -32,6 +36,10 @@
 	<servlet-mapping>
 		<servlet-name>search</servlet-name>
 		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>submit</servlet-name>
+		<url-pattern>/submit</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>main</servlet-name>

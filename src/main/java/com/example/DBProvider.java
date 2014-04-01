@@ -56,6 +56,16 @@ public class DBProvider {
 			rs = preparedStatement.executeQuery();
 			return rs;
 		}
+		public void executeAdd(String query) throws SQLException{
+			PreparedStatement preparedStatement = null;
+			//Statement statement = connection.createStatement();
+			try{
+				preparedStatement = connection.prepareStatement(query);				
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+			preparedStatement.execute();
+		}
 		
 		public void closeConn(){
 			if(connection!=null){
