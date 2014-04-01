@@ -1,10 +1,6 @@
 package com.example;
 
-<<<<<<< HEAD
-public class Velocity {
 
-}
-=======
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -57,4 +53,3 @@ public class Velocity extends HttpServlet {
     }
 
 }
->>>>>>> dev_beta
