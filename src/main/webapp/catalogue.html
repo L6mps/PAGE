@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+#include("html/head.html")
+</head>
+
+<body class="main">
+	#include("html/header.html")
+	<div id="container">
+	#include("html/search-sidebar.html")
+	<div id="page_content">
+	<h1>Hooldekogude arv maakondade l6ikes:</h1>
+	<ul>
+	#foreach($item in $results)
+		<li>$item.location ($item.count )</li>
+		#end
+	</ul>
+	</div>
+	</div>
+</body>
+</html>
