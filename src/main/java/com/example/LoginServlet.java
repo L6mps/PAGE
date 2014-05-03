@@ -39,7 +39,7 @@ class LoginServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e){
-			output="{ 'status':'ERROR' }";
+			output="{ 'status':'ERROR', 'data':'generalfailure' }";
 			//Now what?
 			e.printStackTrace();
 		}
@@ -83,7 +83,6 @@ class LoginServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//TODO: Save sessionID in database.
 			return "loginsuccess";
 		} else {
 			return "loginfailure";
