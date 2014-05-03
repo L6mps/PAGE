@@ -1,0 +1,29 @@
+<HTML>
+<head>
+<TITLE> Login Page </TITLE>
+</head>
+<body>
+<H3> $application </h3>
+<form name="loginform" id="loginform" action="/vtest/Login" method="post">
+<table width="34%" align="center" cellspacing=3 class="window" border="1" cellpadding=5>
+<tbody>
+<tr>
+<td> User Name </td>
+<td> <input type="text" name="username" id="username"/></td>
+</tr>
+
+<tr><td colspan="2" class="errortext"><span name="error_password" id="error_password"></span></td></tr>
+<tr>
+<td> Password </td>
+<td> <input type="password" name="password" id="password"/></td>
+</tr>
+<tr>
+<td colspan="3" align="center">
+<input type="submit" value="Login"/>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</body>
+</html>

@@ -49,8 +49,23 @@ class LoginServlet extends HttpServlet {
 		outWriter.close();
 		dbprovider.closeConn();
 	}
-	private String checkCachedSession(String user, String checkableSessionId){		
-		return null;
+	private String checkCachedSession(String user, String checkableSessionId){
+		try {
+			ResultSet rs = dbprovider.execute("SELECT * FROM activeSessions where username = '"+user+"'");
+			rs.next();
+			String cmpID = rs.getString(1);
+			rs.close();
+			rs = dbprovider.execute("SELECT * FROM activeSessions where sessionid = '"+checkableSessionId+"'");
+			rs.next();
+			String cmpUser = rs.getString(1);
+			if(user==cmpUser && checkableSessionId==cmpID){
+				return "verifysuccess";
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "verifyfailure";
 	}
 	
 	private String verifyUserLogin(String user, String password, String sessionId){
