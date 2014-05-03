@@ -32,12 +32,12 @@ function submitForm(){
 	var8 = var8.serialize();
 	$.ajax({
 		url: "/search",
-		type: 'POST',
+		type: 'GET',
 		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
-        success:function(){
+        success:function(response){
         	alert("POST Requset success!");
-        	document.getElementById("frame").src = "/search";
+        	document.getElementById("frame").src = response;
         	$("frame").fadeIn(2000);
         } ,
         error:function(data, er, errorCode){
