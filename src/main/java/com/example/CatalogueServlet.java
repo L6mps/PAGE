@@ -102,7 +102,6 @@ public class CatalogueServlet extends HttpServlet {
 		try {
 			rs = dbengine.execute("SELECT * FROM locationStatistics");
 			while(rs.next()) {
-				System.out.println(rs.getInt(1)+" "+rs.getInt(2));
 				retrievedItems.add(new CatalogueItem(rs.getInt(1), rs.getInt(2)));
 			}
 			rs.close();

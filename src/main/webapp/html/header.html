@@ -6,6 +6,18 @@
 			<a href="index.html">Teenused</a> |
 			<a href="index.html">Abi</a> |
 			<a href="html/add.html" target="frame">Lisa</a>|
-			<a class="login">Login</a>
+			<a href="#" onclick="loginModal()">Login</a>
 		</nav>
 	</div>
+	<div id="loginModal">
+		<div id="login">
+				<label for="userName">Username:</label><br>
+				<input type="text" id="userName" name="userName" placeholder="Username"><br>
+				<label for="password">Password:</label><br>
+				<input type="text" id="password" name="password" placeholder="Password"><br>
+				<button onclick="loginModal()" id="loginSubmit">Login</button>
+				<div id="fbButton" class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+				<button onclick="loginModal()" id="cancelLogin">Cancel</button>
+		</div>
+	</div>
+	
