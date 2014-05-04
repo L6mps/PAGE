@@ -2,6 +2,9 @@ package com.example;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,13 +40,63 @@ public class FacebookAuthServlet extends HttpServlet{
 	}	
 	
 	private String handleLogin(String userId, String token){
-		
-		
-		return "";
+		String dataGet = "";
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT * FROM user_password WHERE username = '"+userId+"' and facebook = '" + true + "';");
+		ResultSet rs = null;	
+		try {
+			rs = dbprovider.execute(sb.toString());
+			rs.next();
+			dataGet = rs.getString(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String data = "{'status':'failure', 'data':'verifiyfailure'}";
+		if(rs==null){
+			data = addNewFacebookUser(userId);
+		} else if(dataGet == userId){
+			data = doLogin(userId);
+			
+		}
+		return data;
 	}
 	
-	private boolean addNewFacebookUser(String userId){
+	private String addNewFacebookUser(String userId){
+		//TODO: Add facebook user to database.
+		return doLogin(userId);
+	}
+	
+	private static String createSessionId(){
+		UUID uid = UUID.randomUUID();
+		return uid.toString();
 		
-		return true;
+	}
+	
+	
+	private String verifyUserLogin(String user, String sessionId){
+		
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO activeSessions (sessionId, username, canedit) VALUES (");
+			sb.append(sessionId+",");
+			sb.append(user+",");
+			sb.append("true)");
+			try {
+				dbprovider.execute(sb.toString());
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return "loginfailure";
+			}
+			return "loginsuccess";
+		}
+	
+	private String doLogin(String user){
+		String sessionID = createSessionId();
+		String data = verifyUserLogin(user, sessionID);
+		if(data==null){
+			return "{ 'status':'ERROR', 'data':'' }";
+		} else {
+			return "{ 'status':'SUCCESS', 'data':'" + data +"', 'sessionID':'"+sessionID+"' }";
+		}
 	}
 }

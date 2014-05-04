@@ -91,7 +91,7 @@ public class SearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("POST INVOKED");
 		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
-		System.out.println(br.readLine());
+		System.out.println(req.getParameter("search"));
 		
 	}
 }

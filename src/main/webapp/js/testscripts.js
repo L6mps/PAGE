@@ -33,7 +33,7 @@ function submitForm(){
 	$.ajax({
 		url: "/search",
 		type: 'POST',
-		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
+		data : { "search": 'tere', "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
         success:function(){
         	alert("POST Requset success!");
