@@ -35,11 +35,11 @@ public class SearchEngine {
 	private ArrayList<Item> mapSelections(){
 		ResultSet rs;
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM resultSummary ");
+		sb.append("SELECT * FROM generalinfo ");
 		ArrayList<Item> items = new ArrayList<Item>();
 		for(int i = 0; i<4; i++)
 			if(selectedParams[i])
-				sb.append("INNER JOIN service" + (i+1) + " ON (resultSummary.id = service"+(i+1)+".id) ");
+				sb.append("INNER JOIN service" + (i+1) + " ON (generalinfo.id = service"+(i+1)+".id) ");
 		//Just append other params to sb with WHERE somethingsomething = somethingother
 		try {
 			rs = dbengine.execute(sb.toString());
