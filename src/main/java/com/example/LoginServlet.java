@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -49,17 +50,25 @@ class LoginServlet extends HttpServlet {
 		outWriter.close();
 		dbprovider.closeConn();
 	}
-	private String checkCachedSession(String user, String checkableSessionId){
+	private String checkCachedSession(String checkableSessionId){
 		try {
-			ResultSet rs = dbprovider.execute("SELECT * FROM activeSessions where username = '"+user+"'");
+			ResultSet rs = dbprovider.execute("SELECT * FROM activeSessions where sessionid = '"+checkableSessionId+"'");
 			rs.next();
-			String cmpID = rs.getString(1);
+			String cmpUser = rs.getString(2);
 			rs.close();
-			rs = dbprovider.execute("SELECT * FROM activeSessions where sessionid = '"+checkableSessionId+"'");
+			rs = dbprovider.execute("SELECT * FROM activesessions where username ='"+cmpUser+"';");
 			rs.next();
-			String cmpUser = rs.getString(1);
-			if(user==cmpUser && checkableSessionId==cmpID){
-				return "verifysuccess";
+			ArrayList<String> sessions = new ArrayList<String>();
+			while(rs.next()){
+				sessions.add(rs.getString(1));
+				if(rs.getString(1)!=checkableSessionId){
+					dbprovider.execute("DELETE FROM activesessions where sessionid ='"+rs.getString(1)+"';");
+				}
+			}
+			for(String session : sessions){
+				if(session==checkableSessionId){
+					return "verifysuccess";
+				}
 			}			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -136,7 +145,7 @@ class LoginServlet extends HttpServlet {
 	
 	private String doVerification(String user, String sessionCheckID){
 		String sessionID = createSessionId();
-		String data = checkCachedSession(user, sessionCheckID);
+		String data = checkCachedSession(sessionCheckID);
 		if(data==null){
 			return "{ 'status':'ERROR', 'data':'' }";
 		} else {
