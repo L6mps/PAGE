@@ -31,8 +31,8 @@ function submitForm(){
 	var7 = var7.serialize();
 	var8 = var8.serialize();
 	$.ajax({
+		type: 'get',
 		url: "/search",
-		type: 'GET',
 		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
         success:function(response){

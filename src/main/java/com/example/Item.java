@@ -10,12 +10,14 @@ public class Item extends Object{
 	private String loc1;
 	private String loc2;
 	private String[] additionals;
+	private String idRow;
 	public Item(int id, String name, int price, int loc1, int loc2, int mainopts) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		locToString(loc1, loc2);
+		this.idRow = "<a href=\"item?id="+id+"\">";
 		addAdditionals(mainopts);
 		generateBinary();
 	}
@@ -48,9 +50,9 @@ public class Item extends Object{
 		this.name = name;
 		this.price = price;
 		this.additionals = null;
+		this.idRow = "<a href=\"item?id="+id+"\">";
 		locToString(loc1, loc2);
 		
-		System.out.println(this.loc2+" "+this.loc1);
 	}
 
 	private void generateBinary(){
