@@ -44,7 +44,7 @@ public class SearchEngine {
 		try {
 			rs = dbengine.execute(sb.toString());
 			while(rs.next()){
-				Item item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4));
+				Item item = new Item(rs.getInt(1), rs.getString(2),rs.getInt(5) ,rs.getInt(3), rs.getInt(4),rs.getInt(10), rs.getString(11), rs.getString(7), rs.getString(6), rs.getString(8), rs.getString(9));
 				items.add(item);
 			}
 			rs.close();
@@ -54,37 +54,6 @@ public class SearchEngine {
 		}
 		return items;
 	}
-		/*
-		ArrayList<ResultSet> resultsets = new ArrayList<ResultSet>();
-		ArrayList<Set<Integer>> comparingSets = new ArrayList<Set<Integer>>();
-		for(int i=0;i<4; i++){
-			if(selectedParams[i]){
-				ResultSet rs;
-				try {
-					rs = dbengine.execute("select * from " + tabs[i] + ";");
-					resultsets.add(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		} for(ResultSet result : resultsets){
-			try {
-				Set<Integer> setter = new HashSet<Integer>();
-				while(result.next()){
-					setter.add(result.getInt(1));
-				}
-				comparingSets.add(setter);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if(resultsets.size()>1){
-			for(int i=resultsets.size()-1; i>0;i--){
-				comparingSets.get(i-1).retainAll(comparingSets.get(i));
-			}
-		}
-	}*/
 	
 	private void remapKeys(Enumeration<String> params){
 		while(params.hasMoreElements()){
@@ -94,6 +63,8 @@ public class SearchEngine {
 		}
 		initSelections();
 	}
+	
+	
 	private void initSelections(){
 		Arrays.fill(selectedParams, Boolean.FALSE);
 		if(paramKeys.contains("demented")){

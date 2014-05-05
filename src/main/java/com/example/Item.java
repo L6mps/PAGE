@@ -11,11 +11,21 @@ public class Item extends Object{
 	private String loc2;
 	private String[] additionals;
 	private String idRow;
-	public Item(int id, String name, int price, int loc1, int loc2, int mainopts) {
+	private String mapsText;
+	private String fulltext;
+	private String summary;
+	private String picAddress;
+	private String optionals;
+	public Item(int id, String name, int price, int loc1, int loc2, int mainopts, String coords, String fulltext, String summary, String picAddress, String optionals) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.mapsText = "https://www.google.com/maps/embed/v1/view?key=AIzaSyAfJ2X30a1oZj9Ivcnx9Q9J_R7RxZtP9z4 &center="+coords+"&zoom=18 &maptype=satellite";
+		this.fulltext = fulltext;
+		this.summary = summary;
+		this.picAddress = picAddress;
+		this.optionals = optionals;
 		locToString(loc1, loc2);
 		this.idRow = "<a href=\"item?id="+id+"\">";
 		addAdditionals(mainopts);
@@ -42,6 +52,70 @@ public class Item extends Object{
 		additionals=new String[temp.size()];
 		temp.toArray(additionals);
 		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getIdRow() {
+		return idRow;
+	}
+
+	public void setIdRow(String idRow) {
+		this.idRow = idRow;
+	}
+
+	public String getMapsText() {
+		return mapsText;
+	}
+
+	public void setMapsText(String mapsText) {
+		this.mapsText = mapsText;
+	}
+
+	public String getFulltext() {
+		return fulltext;
+	}
+
+	public void setFulltext(String fulltext) {
+		this.fulltext = fulltext;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getPicAddress() {
+		return picAddress;
+	}
+
+	public void setPicAddress(String picAddress) {
+		this.picAddress = picAddress;
+	}
+
+	public String getOptionals() {
+		return optionals;
+	}
+
+	public void setOptionals(String optionals) {
+		this.optionals = optionals;
+	}
+
+	public void setLoc1(String loc1) {
+		this.loc1 = loc1;
+	}
+
+	public void setLoc2(String loc2) {
+		this.loc2 = loc2;
 	}
 
 	public Item(int id, String name, int price, int loc1, int loc2) {
