@@ -40,20 +40,22 @@ public class FacebookAuthServlet extends HttpServlet{
 	}	
 	
 	private String handleLogin(String userId, String token){
-		String dataGet = "";
+		String dataGet = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM user_password WHERE username = '"+userId+"' and facebook = '" + true + "';");
+		sb.append("SELECT * FROM users WHERE fbid = '"+userId+"';");
 		ResultSet rs = null;	
 		try {
 			rs = dbprovider.execute(sb.toString());
-			rs.next();
-			dataGet = rs.getString(1);
+			if(rs.next()){
+				dataGet = rs.getString(4);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			rs=null;
 		}
 		String data = "{'status':'failure', 'data':'verifiyfailure'}";
-		if(rs==null){
+		if(dataGet==null){
 			data = addNewFacebookUser(userId);
 		} else if(dataGet == userId){
 			data = doLogin(userId);

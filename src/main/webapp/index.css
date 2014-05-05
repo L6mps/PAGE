@@ -80,6 +80,15 @@ table, td , tr{
 #fbButton{
 	display:none;
 }
+#logoutButton{
+	visibility: hidden;
+}
+#adding{
+	visibility: hidden;
+}
+#loginButton{
+	visibility: visible;
+}
 .tables1{
 	width:700px;
 	height:500px;

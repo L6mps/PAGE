@@ -1,12 +1,13 @@
 <div id="masthead">
 		<img src="res/pilt.jpg" alt="pilt" height="100" width="600">
-		<nav>
+		<nav onload="readCookie()">
 			<a href="index.html">Pealeht</a> |
 			<a href="/catalogue">Kataloog</a> |
 			<a href="index.html">Teenused</a> |
 			<a href="index.html">Abi</a> |
-			<a href="html/add.html" target="frame">Lisa</a>|
-			<a href="#" onclick="loginModal()">Login</a>
+			<a id="adding" href="html/add.html" target="frame">Lisa</a>|
+			<a id="loginButton" href="#" onclick="loginModal()">Login</a>
+			<a id="logoutButton" href="#" onclick="loginModal()">Logout</a>
 		</nav>
 	</div>
 	<div id="loginModal">

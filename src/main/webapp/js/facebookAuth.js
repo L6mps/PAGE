@@ -16,6 +16,7 @@ window.fbAsyncInit = function() {
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
+    	checkWithServer();
       testAPI();
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
@@ -51,6 +52,66 @@ window.fbAsyncInit = function() {
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Good to see you, ' + response.name + '.');
+    	var name = response.name;
+      console.log('Good to see you, ' + name + '.');
     });
+  }
+  function checkWithServer() {
+	    console.log('Welcome!  Fetching your information...dipshit. ');
+	    var id;
+	    FB.api('/me', function(response) {
+	         id=response.id;
+	         console.log(id);
+	      
+	    	
+	      $.ajax({
+	    	  url: "/facebook",
+	    	  type: 'GET',
+	    	  data:	{"userId": id},
+	    	  success:function(resp){
+	    		  createCookie(resp.sessionId);
+	    	  }
+	      });
+	    });
+	  }
+  function createCookie(sessionId, userId){
+	  var d=new Date();
+	  d.setTime(d.getTime()+1800000);
+	  var expires=d.toGMTString();
+	  document.cookie="session="+sessionId+"; expires="+expires;
+  }
+  function readCookie(){
+	  var x = document.cookie;
+	  var resp;
+	  FB.getLoginStatus(function(response){
+		  resp=response;
+	  });
+	  if(x){
+			    	var session = x.substring(7,x.length);
+			    		$.ajax({
+			    			url:"/login",
+			    			type:'GET',
+			    			data: { "action": "verify", "user": "", "password": "", "sessionID": session},
+			    		success:function(response){
+			    			if(response.canEdit){
+			    				el1 = document.getElementById("authorized");
+			    				el1.style.visibility = "visible";
+			    				el2 = document.getElementById("nonAuthorized");
+			    				el2.style.visibility = "hidden";
+			    			}
+			    			else{
+			    				el1 = document.getElementById("authorized");
+			    				el1.style.visibility = "hidden";
+			    				el2 = document.getElementById("nonAuthorized");
+			    				el2.style.visibility = "visible";
+			    			}
+			    		},
+			    		error:function(response){
+			    			document.cookie = 'session=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			    		}
+			    		});
+	  }
+	  else if(resp.status==='connected'){
+		  checkWithServer(resp);
+	  }
   }

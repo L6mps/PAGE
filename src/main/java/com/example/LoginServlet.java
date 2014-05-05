@@ -33,7 +33,7 @@ class LoginServlet extends HttpServlet {
 					output = doLogin(userName, password);
 				}
 				else if(action=="verify"){
-					output = doVerification(userName, loginSessionID);
+					output = doVerification(loginSessionID);
 				}
 				else if(action=="logout"){
 					output = doLogout(userName, loginSessionID);
@@ -54,22 +54,9 @@ class LoginServlet extends HttpServlet {
 		try {
 			ResultSet rs = dbprovider.execute("SELECT * FROM activeSessions where sessionid = '"+checkableSessionId+"'");
 			rs.next();
-			String cmpUser = rs.getString(2);
+			boolean canEdit = rs.getBoolean(3);
 			rs.close();
-			rs = dbprovider.execute("SELECT * FROM activesessions where username ='"+cmpUser+"';");
-			rs.next();
-			ArrayList<String> sessions = new ArrayList<String>();
-			while(rs.next()){
-				sessions.add(rs.getString(1));
-				if(rs.getString(1)!=checkableSessionId){
-					dbprovider.execute("DELETE FROM activesessions where sessionid ='"+rs.getString(1)+"';");
-				}
-			}
-			for(String session : sessions){
-				if(session==checkableSessionId){
-					return "verifysuccess";
-				}
-			}			
+			return "verifysuccess;"+canEdit;		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,13 +130,19 @@ class LoginServlet extends HttpServlet {
 		return BCrypt.hashpw( password, username);
 	}
 	
-	private String doVerification(String user, String sessionCheckID){
-		String sessionID = createSessionId();
+	private String doVerification(String sessionCheckID){
 		String data = checkCachedSession(sessionCheckID);
+		String[] split = data.split(";");
+		data=split[0];
+		boolean canEdit=false;
+		if(split.length>1){
+			if(split[1].equals("true"))
+				canEdit=true;
+		}
 		if(data==null){
 			return "{ 'status':'ERROR', 'data':'' }";
 		} else {
-			return "{ 'status':'SUCCESS', 'data':'" + data +"', 'sessionID':'"+sessionID+"' }";
+			return "{ 'status':'SUCCESS', 'data':'" + data +"', 'sessionID':'"+sessionCheckID+"', 'canEdit':'"+canEdit+"' }";
 		}
 	}
 	

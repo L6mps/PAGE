@@ -58,11 +58,53 @@ window.fbAsyncInit = function() {
   function checkWithServer(response) {
 	    console.log('Welcome!  Fetching your information.... ');
 	    	var id = response.userID;
-	    	var accessToken = response.accessToken;
 	      $.ajax({
 	    	  url: "/facebook",
 	    	  type: 'GET',
-	    	  data:	{ "userId": id, "accessToken": accessToken},
-	    	  
+	    	  data:	{ "userId": id},
+	    	  success:function(resp){
+	    		  createCookie(resp.sessionId);
+	    	  }
 	      });
 	  }
+  function createCookie(sessionId, userId){
+	  var d=new Date();
+	  d.setTime(d.getTime()+1800000);
+	  var expires=d.toGMTString();
+	  document.cookie="session="+sessionId+"; expires="+expires;
+  }
+  function readCookie(){
+	  var x = document.cookie;
+	  var resp;
+	  FB.getLoginStatus(function(response){
+		  resp=response;
+	  });
+	  if(x){
+			    	var session = x.substring(7,x.length);
+			    		$.ajax({
+			    			url:"/login",
+			    			type:'GET',
+			    			data: { "action": "verify", "user": "", "password": "", "sessionID": session},
+			    		success:function(response){
+			    			if(response.canEdit){
+			    				el1 = document.getElementById("authorized");
+			    				el1.style.visibility = "visible";
+			    				el2 = document.getElementById("nonAuthorized");
+			    				el2.style.visibility = "hidden";
+			    			}
+			    			else{
+			    				el1 = document.getElementById("authorized");
+			    				el1.style.visibility = "hidden";
+			    				el2 = document.getElementById("nonAuthorized");
+			    				el2.style.visibility = "visible";
+			    			}
+			    		},
+			    		error:function(response){
+			    			document.cookie = 'session=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			    		}
+			    		});
+	  }
+	  else if(resp.status==='connected'){
+		  checkWithServer(resp);
+	  }
+  }

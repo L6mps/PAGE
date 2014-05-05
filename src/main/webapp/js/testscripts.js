@@ -14,34 +14,30 @@ $.ajaxSetup({
 });
 
 function submitForm(){
-	var var1 = $("search");
-	var var2 = $("price");
-	var var3 = $("demented");
-	var var4 = $("wheelchair");
-	var var5 = $("nursing");
-	var var6 = $("paidservices");
-	var var7 = $("D1");
-	var var8 = $("D2");
-	var1 = var1.serialize();
-	var2 = var2.serialize();
-	var3 = var3.serialize();
-	var4 = var4.serialize();
-	var5 = var5.serialize();
-	var6 = var6.serialize();
-	var7 = var7.serialize();
-	var8 = var8.serialize();
+	var var1 = document.getElementById('search').value;
+	var var2 = document.getElementById('price').value;
+	if(document.getElementById('demented').checked){
+		var var3 = document.getElementById('demented').value;
+	}
+	if(document.getElementById('wheelchair').checked){
+	var var4 = document.getElementById('wheelchair').value;
+	}
+	if(document.getElementById('nursing').checked){
+		var var5 = document.getElementById('nursing').value;
+	}
+	if(document.getElementById('paidservices').checked){
+		var var6 = document.getElementById('paidservices').value;
+	}
+	var var7 = document.getElementById('D1').value;
+	var var8 = document.getElementById('D2').value;
 	$.ajax({
-		type: 'get',
 		url: "/search",
+		type: 'GET',
 		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
         success:function(response){
-        	alert("POST Requset success!");
-        	document.getElementById("frame").src = response;
+        	$('#frame').contents().find('html').html(response);
         	$("frame").fadeIn(2000);
-        } ,
-        error:function(data, er, errorCode){
-    	 alert("POST Request failed! Errorcode : "+errorCode+"; Data:"+data);
         }
 	});
 	
