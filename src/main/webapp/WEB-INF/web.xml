@@ -41,7 +41,15 @@
 		<servlet-name>Facebook</servlet-name>
 		<servlet-class>com.example.FacebookAuthServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>item</servlet-name>
+		<servlet-class>com.example.ItemServlet</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>item</servlet-name>
+		<url-pattern>/item</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>hello</servlet-name>
 		<url-pattern>/hello/*</url-pattern>
@@ -74,6 +82,7 @@
 		<servlet-name>Facebook</servlet-name>
 		<url-pattern>/facebook</url-pattern>
 	</servlet-mapping>
+
 	
 	
 </web-app>

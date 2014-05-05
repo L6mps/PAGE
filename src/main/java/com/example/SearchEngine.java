@@ -44,7 +44,7 @@ public class SearchEngine {
 		try {
 			rs = dbengine.execute(sb.toString());
 			while(rs.next()){
-				Item item = new Item(rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4));
+				Item item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(5), rs.getInt(3), rs.getInt(4));
 				items.add(item);
 			}
 			rs.close();

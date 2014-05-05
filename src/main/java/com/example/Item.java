@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item extends Object{
+	private int id;
 	private String name;
 	private int price;
 	private String loc1;
 	private String loc2;
 	private String[] additionals;
-	public Item(String name, int price, int loc1, int loc2, int mainopts) {
+	public Item(int id, String name, int price, int loc1, int loc2, int mainopts) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		locToString(loc1, loc2);
@@ -40,8 +42,9 @@ public class Item extends Object{
 		
 	}
 
-	public Item(String name, int price, int loc1, int loc2) {
+	public Item(int id, String name, int price, int loc1, int loc2) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.additionals = null;
