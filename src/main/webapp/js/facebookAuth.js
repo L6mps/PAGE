@@ -5,7 +5,6 @@ window.fbAsyncInit = function() {
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
   });
-
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
   // for any authentication related change, such as login, logout or session refresh. This means that
   // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -16,8 +15,9 @@ window.fbAsyncInit = function() {
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
-    	checkWithServer();
-      testAPI();
+    	if(readCookie()){
+    		checkWithServer();
+    	}
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 
@@ -68,50 +68,59 @@ window.fbAsyncInit = function() {
 	    	  url: "/facebook",
 	    	  type: 'GET',
 	    	  data:	{"userId": id},
-	    	  success:function(resp){
-	    		  createCookie(resp.sessionId);
+	    	  success:function(data){
+	    		  var cookiedough=document.cookie.split(';')[0].trim();
+	    		  console.log(cookiedough);
+	    		  if(cookiedough.substring(8,cookiedough.length)!=data){
+		    		  console.log(data+" 2");
+		    		  var d=new Date();
+		    		  d.setTime(d.getTime()+1800000);
+		    		  var expires=d.toGMTString();
+		    		  document.cookie="session="+data+"; expires="+expires;
+	    		  }
+	    		  else{
+	    			  readCookie();
+	    		  }
 	    	  }
 	      });
 	    });
 	  }
-  function createCookie(sessionId, userId){
-	  var d=new Date();
-	  d.setTime(d.getTime()+1800000);
-	  var expires=d.toGMTString();
-	  document.cookie="session="+sessionId+"; expires="+expires;
-  }
   function readCookie(){
-	  var x = document.cookie;
-	  var resp;
-	  FB.getLoginStatus(function(response){
-		  resp=response;
-	  });
-	  if(x){
-			    	var session = x.substring(7,x.length);
-			    		$.ajax({
-			    			url:"/login",
-			    			type:'GET',
-			    			data: { "action": "verify", "user": "", "password": "", "sessionID": session},
-			    		success:function(response){
-			    			if(response.canEdit){
-			    				el1 = document.getElementById("authorized");
-			    				el1.style.visibility = "visible";
-			    				el2 = document.getElementById("nonAuthorized");
-			    				el2.style.visibility = "hidden";
-			    			}
-			    			else{
-			    				el1 = document.getElementById("authorized");
-			    				el1.style.visibility = "hidden";
-			    				el2 = document.getElementById("nonAuthorized");
-			    				el2.style.visibility = "visible";
-			    			}
-			    		},
-			    		error:function(response){
-			    			document.cookie = 'session=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-			    		}
-			    		});
-	  }
-	  else if(resp.status==='connected'){
-		  checkWithServer(resp);
-	  }
+	  console.log("hello");
+		  var x = document.cookie.split(';')[0].trim();
+		  console.log(x);
+		  if(x.indexOf("session")==0){
+			  console.log("hello2");
+				    	var session = x.substring(8,x.length);
+				    		$.ajax({
+				    			url:"/login",
+				    			type:'GET',
+				    			data: { "action": "verify", "sessionID": session},
+				    		success:function(data){
+				    			console.log(data);
+				    			if(data.substring(0,4)=="true"){
+				    				console.log("tere");
+				    				var el1 = document.getElementById("logoutButton");
+				    				el1.style.visibility = "visible";
+				    				var el2 = document.getElementById("loginButton");
+				    				el2.style.visibility = "hidden";
+				    				var el3 = document.getElementById("adding");
+				    				el3.style.visibility = "visible";
+				    			}
+				    			else{
+				    				var el1 = document.getElementById("logoutButton");
+				    				el1.style.visibility = "hidden";
+				    				var el2 = document.getElementById("loginButton");
+				    				el2.style.visibility = "visible";
+				    				var el3 = document.getElementById("adding");
+				    				el3.style.visibility = "hidden";
+				    			}
+				    		},
+				    		error:function(response){
+				    			document.cookie = 'session=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+				    		}
+				    		});
+				    		return false;
+		  }
+		  return true;
   }

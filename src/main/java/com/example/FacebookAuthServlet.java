@@ -23,11 +23,10 @@ public class FacebookAuthServlet extends HttpServlet{
 			throws ServletException, IOException {
 		dbprovider = new DBProvider();
 		String userId = req.getParameter("userId");
-		String loginSessionID = req.getParameter("accessToken");
 		String output = "";
 		System.out.println("I'm being used! By:" + userId);
 		try{
-			output = handleLogin(userId, loginSessionID);
+			output = handleLogin(userId);
 		} catch (Exception e){
 			output = "{'status':'ERROR', 'data':'generalfailure'}";
 			// THIS IS BAD.
@@ -39,7 +38,7 @@ public class FacebookAuthServlet extends HttpServlet{
 		dbprovider.closeConn();
 	}	
 	
-	private String handleLogin(String userId, String token){
+	private String handleLogin(String userId){
 		String dataGet = null;
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM users WHERE fbid = '"+userId+"';");
@@ -80,11 +79,12 @@ public class FacebookAuthServlet extends HttpServlet{
 		
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO activeSessions (sessionId, username, canedit) VALUES (");
-			sb.append(sessionId+",");
-			sb.append(user+",");
+			sb.append("'"+sessionId+"',");
+			sb.append("'"+user+"',");
 			sb.append("true)");
 			try {
-				dbprovider.execute(sb.toString());
+				dbprovider.executeAdd(sb.toString());
+				//dbprovider.execute(sb.toString());
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return "loginfailure";
@@ -94,11 +94,13 @@ public class FacebookAuthServlet extends HttpServlet{
 	
 	private String doLogin(String user){
 		String sessionID = createSessionId();
+		System.out.println(sessionID);
 		String data = verifyUserLogin(user, sessionID);
 		if(data==null){
 			return "{ 'status':'ERROR', 'data':'' }";
 		} else {
-			return "{ 'status':'SUCCESS', 'data':'" + data +"', 'sessionID':'"+sessionID+"' }";
+			System.out.println("wtf");
+			return sessionID;
 		}
 	}
 }

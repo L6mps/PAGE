@@ -1,11 +1,11 @@
 <div id="masthead">
 		<img src="res/pilt.jpg" alt="pilt" height="100" width="600">
-		<nav onload="readCookie()">
+		<nav id="navigation" name="navigation">
 			<a href="index.html">Pealeht</a> |
 			<a href="/catalogue">Kataloog</a> |
 			<a href="index.html">Teenused</a> |
 			<a href="index.html">Abi</a> |
-			<a id="adding" href="html/add.html" target="frame">Lisa</a>|
+			<a id="adding" href="#" onclick="add()">Lisa</a>|
 			<a id="loginButton" href="#" onclick="loginModal()">Login</a>
 			<a id="logoutButton" href="#" onclick="loginModal()">Logout</a>
 		</nav>
@@ -19,6 +19,40 @@
 				<button onclick="loginModal()" id="loginSubmit">Login</button>
 				<div id="fbButton" class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
 				<button onclick="loginModal()" id="cancelLogin">Cancel</button>
+		</div>
+	</div>
+	<div id="addModal">
+	<div id="add">
+		<form target="_blank">
+			Nimi: <input type="text" name="name"><br>
+			Hind: <input type="text" id="textInput" name="price"><br>
+			<input type="checkbox" name="demented" value="1">Dementsus<br>
+			<input type="checkbox" name="wheelchair" value="1">Ratastool<br>
+			<input type="checkbox" name="nursing" value="1">&Otildeendusabi<br>
+			<input type="checkbox" name="paidservices" value="1">Tasuline hooldus<br>
+			<select id="D1" name="D1" onchange="changeLocation()">
+			  <option value="0">K6ik maakonnad</option>
+			  <option value="1">Harjumaa</option>
+			  <option value="2">Hiiumaa</option>
+			  <option value="3">Ida-Virumaa</option>
+			  <option value="4">J6gevamaa</option>
+			  <option value="5">J2rvamaa</option>
+			  <option value="6">L22nemaa</option>
+			  <option value="7">L22lne-Virumaa</option>
+			  <option value="8">P6lvamaa</option>
+			  <option value="9">P2rnumaa</option>
+			  <option value="10">Raplamaa</option>
+			  <option value="11">Saaremaa</option>
+			  <option value="12">Tartumaa</option>
+			  <option value="13">Valgamaa</option>
+			  <option value="14">Viljandimaa</option>
+			  <option value="15">V6rumaa</option>
+			</select><br>
+			<select id="D2" name="D2">
+			  <option value="0">K6ik vallad</option>
+			</select><br>
+			<button type="submit" id="jqsubmit" formaction="/submit">JQuerySubmit</button>
+		</form>
 		</div>
 	</div>
 	

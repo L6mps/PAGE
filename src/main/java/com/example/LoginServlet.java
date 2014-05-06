@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	
 	DBProvider dbprovider;
 	@Override
@@ -29,14 +29,16 @@ class LoginServlet extends HttpServlet {
 			if(action==null){
 				output = "{ 'status':'ERROR' }";
 			} else {
+				System.out.println("asd");
 				if(action=="login"){
-					output = doLogin(userName, password);
+					output = login(userName, password);
 				}
-				else if(action=="verify"){
-					output = doVerification(loginSessionID);
+				else if(action.equals("verify")){
+					System.out.println("asd");
+					output = verify(loginSessionID);
 				}
 				else if(action=="logout"){
-					output = doLogout(userName, loginSessionID);
+					output = logout(userName, loginSessionID);
 				}
 			}
 		} catch (Exception e){
@@ -52,11 +54,14 @@ class LoginServlet extends HttpServlet {
 	}
 	private String checkCachedSession(String checkableSessionId){
 		try {
+			System.out.println(checkableSessionId);
 			ResultSet rs = dbprovider.execute("SELECT * FROM activeSessions where sessionid = '"+checkableSessionId+"'");
-			rs.next();
-			boolean canEdit = rs.getBoolean(3);
+			boolean canEdit=false;
+			if(rs.next())
+				canEdit = rs.getBoolean(3);
+			System.out.println("asd"+canEdit);
 			rs.close();
-			return "verifysuccess;"+canEdit;		
+			return "verifysuccess;true";		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +90,7 @@ class LoginServlet extends HttpServlet {
 		}
 	}
 	
-	private String doLogin(String user, String pw){
+	private String login(String user, String pw){
 		String sessionID = createSessionId();
 		String data = verifyUserLogin(user, pw, sessionID);
 		if(data==null){
@@ -130,23 +135,18 @@ class LoginServlet extends HttpServlet {
 		return BCrypt.hashpw( password, username);
 	}
 	
-	private String doVerification(String sessionCheckID){
+	private String verify(String sessionCheckID){
 		String data = checkCachedSession(sessionCheckID);
 		String[] split = data.split(";");
 		data=split[0];
-		boolean canEdit=false;
-		if(split.length>1){
-			if(split[1].equals("true"))
-				canEdit=true;
-		}
 		if(data==null){
 			return "{ 'status':'ERROR', 'data':'' }";
 		} else {
-			return "{ 'status':'SUCCESS', 'data':'" + data +"', 'sessionID':'"+sessionCheckID+"', 'canEdit':'"+canEdit+"' }";
+			return "true";
 		}
 	}
 	
-	private String doLogout(String user, String loginSessionId){
+	private String logout(String user, String loginSessionId){
 		if(executeLogout(user, loginSessionId)){
 			try {
 				dbprovider.execute("DELETE FROM activeSessions WHERE sessionid = '"+loginSessionId+"'");
