@@ -24,8 +24,7 @@ public class Velocity extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        //super.init(config);
-        super.init();
+        super.init(config);
         engine = createTemplateEngine(config.getServletContext());
     }
 
@@ -46,6 +45,7 @@ public class Velocity extends HttpServlet {
         VelocityContext context = new VelocityContext();
         // add additional data to the context here
         // it can then be used inside the templates
+        resp.setContentType("text/html");
         getTemplate(req).merge(context, resp.getWriter());
     }
 
