@@ -37,7 +37,6 @@ public class MainSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
-		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
 		Template temp = null;
 		try{
@@ -63,10 +62,11 @@ public class MainSearchServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-		context.put("helloworld", 5);
-		temp.merge(context, sw);
+		resp.setContentType("text/html");
+		resp.setCharacterEncoding("UTF-8");
 		PrintWriter write = resp.getWriter();
-		write.println(sw);
+		temp.merge(context, write);
+		write.println(write);
 
 	}
 	@Override

@@ -40,7 +40,6 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
-		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
 		System.out.println(req.getParameter("price"));
 		Template temp = null;
@@ -75,9 +74,9 @@ public class SearchServlet extends HttpServlet {
 			i++;
 		}
 		context.put("results", items);
-		temp.merge(context, sw);
 		PrintWriter write = resp.getWriter();
-		write.println(sw);
+		temp.merge(context, write);
+		write.println(write);
 
 	}
 	@Override
