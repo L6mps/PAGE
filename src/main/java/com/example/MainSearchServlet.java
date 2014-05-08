@@ -64,9 +64,7 @@ public class MainSearchServlet extends HttpServlet {
 		}
 		resp.setContentType("text/html; ");
 		resp.setCharacterEncoding("UTF-8");
-		PrintWriter write = resp.getWriter();
-		temp.merge(context, write);
-		write.println(write);
+		temp.merge(context,resp.getWriter());
 
 	}
 	@Override
