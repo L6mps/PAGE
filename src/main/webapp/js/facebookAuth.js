@@ -69,9 +69,9 @@ window.fbAsyncInit = function() {
 	    	  type: 'GET',
 	    	  data:	{"userId": id},
 	    	  success:function(data){
-	    		  var cookiedough=document.cookie.split(';')[0].trim();
+	    		  var cookiedough=$.cookie('session');
 	    		  console.log(cookiedough);
-	    		  if(cookiedough.substring(8,cookiedough.length)!=data){
+	    		  if(cookiedough!=data){
 		    		  console.log(data+" 2");
 		    		  var d=new Date();
 		    		  d.setTime(d.getTime()+1800000);
@@ -87,12 +87,11 @@ window.fbAsyncInit = function() {
 	  }
   function readCookie(){
 	  console.log("hello");
-		  var x = document.cookie.split(';')[0].trim();
-		  console.log(x);
-		  if(x.indexOf("session")==0){
+		  var session = $.cookie('session');
+		  console.log(session);
+		  if(session){
 			  console.log("hello2");
-				    	var session = x.substring(8,x.length);
-				    		$.ajax({
+				    	   		$.ajax({
 				    			url:"/login",
 				    			type:'GET',
 				    			data: { "action": "verify", "sessionID": session},
@@ -117,10 +116,23 @@ window.fbAsyncInit = function() {
 				    			}
 				    		},
 				    		error:function(response){
-				    			document.cookie = 'session=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+				    			$.removeCookie('session');
 				    		}
 				    		});
 				    		return false;
 		  }
 		  return true;
   }
+  function loginModal(){
+		el = document.getElementById("loginModal");
+		el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		el2 = document.getElementById("fbButton");
+		el2.style.display = (el2.style.display == "inline") ? "none" : "inline";
+		if(el.style.visibility=="hidden"){
+			readCookie();
+		}
+	}
+	function add(){
+		el = document.getElementById("addModal");
+		el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+	}
