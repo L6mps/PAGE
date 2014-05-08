@@ -62,7 +62,7 @@ public class MainSearchServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-		resp.setContentType("text/html");
+		resp.setContentType("text/html; ");
 		resp.setCharacterEncoding("UTF-8");
 		PrintWriter write = resp.getWriter();
 		temp.merge(context, write);

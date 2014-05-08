@@ -73,7 +73,7 @@ public class CatalogueServlet extends HttpServlet {
 			items[i]=item;
 			i++;
 		}
-		resp.setContentType("text/html");
+		resp.setContentType("text/html; ");
 		resp.setCharacterEncoding("UTF-8");
 		context.put("results", items);
 		PrintWriter write = resp.getWriter();
