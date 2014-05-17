@@ -28,11 +28,11 @@ public class FacebookAuthServlet extends HttpServlet{
 		try{
 			output = handleLogin(userId);
 		} catch (Exception e){
-			output = "{'status':'ERROR', 'data':'generalfailure'}";
+			output = "{'status':'error', 'data':'generalfailure'}";
 			// THIS IS BAD.
 		}
 		PrintWriter outWriter = resp.getWriter();
-		resp.setContentType("text/html");
+		resp.setContentType("application/json");
 		outWriter.println(output);
 		outWriter.close();
 		dbprovider.closeConn();
@@ -97,10 +97,10 @@ public class FacebookAuthServlet extends HttpServlet{
 		System.out.println(sessionID);
 		String data = verifyUserLogin(user, sessionID);
 		if(data==null){
-			return "{ 'status':'ERROR', 'data':'' }";
+			return "{ 'status':'error', 'data':'' }";
 		} else {
 			System.out.println("wtf");
-			return sessionID;
+			return "{ 'status':'success', 'data':'"+sessionID+"' }";
 		}
 	}
 }

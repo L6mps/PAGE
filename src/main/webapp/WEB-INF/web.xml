@@ -45,7 +45,19 @@
 		<servlet-name>item</servlet-name>
 		<servlet-class>com.example.ItemServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>counter</servlet-name>
+		<servlet-class>com.example.CounterServlet</servlet-class>
+	</servlet>
 
+	<listener>
+		<listener-class>com.example.SessionCounter</listener-class>
+	</listener>
+
+	<servlet-mapping>
+		<servlet-name>counter</servlet-name>
+		<url-pattern>/counter</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>item</servlet-name>
 		<url-pattern>/item</url-pattern>

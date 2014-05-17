@@ -56,6 +56,8 @@ window.fbAsyncInit = function() {
       console.log('Good to see you, ' + name + '.');
     });
   }
+  
+  
   function checkWithServer() {
 	    console.log('Welcome!  Fetching your information...dipshit. ');
 	    var id;
@@ -69,6 +71,7 @@ window.fbAsyncInit = function() {
 	    	  type: 'GET',
 	    	  data:	{"userId": id},
 	    	  success:function(data){
+	    		  console.log("data from server:" + data);
 	    		  var cookiedough=$.cookie('session');
 	    		  console.log(cookiedough);
 	    		  if(cookiedough!=data){
@@ -96,7 +99,7 @@ window.fbAsyncInit = function() {
 				    			type:'GET',
 				    			data: { "action": "verify", "sessionID": session},
 				    		success:function(data){
-				    			console.log(data);
+				    			console.log("data received" + data.data);
 				    			if(data.substring(0,4)=="true"){
 				    				console.log("tere");
 				    				var el1 = document.getElementById("logoutButton");

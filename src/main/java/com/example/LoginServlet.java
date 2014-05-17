@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String loginSessionID = request.getParameter("sessionID");
 			if(action==null){
-				output = "{ 'status':'ERROR' }";
+				output = "{ 'status':'error' }";
 			} else {
 				System.out.println("asd");
 				if(action=="login"){
@@ -42,12 +42,12 @@ public class LoginServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e){
-			output="{ 'status':'ERROR', 'data':'generalfailure' }";
+			output="{ 'status':'error', 'data':'generalfailure' }";
 			//Now what?
 			e.printStackTrace();
 		}
 		PrintWriter outWriter = response.getWriter();
-		response.setContentType("text/html");
+		response.setContentType("application/json");
 		outWriter.println(output);
 		outWriter.close();
 		dbprovider.closeConn();
@@ -61,7 +61,11 @@ public class LoginServlet extends HttpServlet {
 				canEdit = rs.getBoolean(3);
 			System.out.println("asd"+canEdit);
 			rs.close();
-			return "verifysuccess;true";		
+			if(canEdit){
+				return "verifysuccesstrue";		
+			} else {
+				return "verifysuccessfalse";
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,9 +98,9 @@ public class LoginServlet extends HttpServlet {
 		String sessionID = createSessionId();
 		String data = verifyUserLogin(user, pw, sessionID);
 		if(data==null){
-			return "{ 'status':'ERROR', 'data':'' }";
+			return "{ 'status':'error', 'data':'' }";
 		} else {
-			return "{ 'status':'SUCCESS', 'data':'" + data +"', 'sessionID':'"+sessionID+"' }";
+			return "{ 'status':'success', 'data':'" + data +"', 'sessionID':'"+sessionID+"' }";
 		}
 	}
 	
@@ -140,9 +144,9 @@ public class LoginServlet extends HttpServlet {
 		String[] split = data.split(";");
 		data=split[0];
 		if(data==null){
-			return "{ 'status':'ERROR', 'data':'' }";
+			return "{ 'status':'error', 'data':'' }";
 		} else {
-			return "true";
+			return "{ 'status':'success', 'data':'"+data+"' }";
 		}
 	}
 	
@@ -154,9 +158,9 @@ public class LoginServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "{'status':'SUCCESS'}";
+			return "{'status':'success'}";
 		} else {
-			return "{'status':'ERROR'}";	
+			return "{'status':'error'}";	
 		}
 		
 	}
