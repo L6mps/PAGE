@@ -62,9 +62,9 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("asd"+canEdit);
 			rs.close();
 			if(canEdit){
-				return "verifysuccesstrue";		
+				return "verifysuccess;true";		
 			} else {
-				return "verifysuccessfalse";
+				return "verifysuccess;false";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -142,7 +142,7 @@ public class LoginServlet extends HttpServlet {
 	private String verify(String sessionCheckID){
 		String data = checkCachedSession(sessionCheckID);
 		String[] split = data.split(";");
-		data=split[0];
+		data=split[1];
 		if(data==null){
 			return "{ 'status':'error', 'data':'' }";
 		} else {

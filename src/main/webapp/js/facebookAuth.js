@@ -71,15 +71,15 @@ window.fbAsyncInit = function() {
 	    	  type: 'GET',
 	    	  data:	{"userId": id},
 	    	  success:function(data){
-	    		  console.log("data from server:" + data);
+	    		  console.log("request status:" + data.status);
 	    		  var cookiedough=$.cookie('session');
 	    		  console.log(cookiedough);
-	    		  if(cookiedough!=data){
-		    		  console.log(data+" 2");
+	    		  if(cookiedough!=data.sessionID){
+		    		  console.log(data.sessionID+" 2");
 		    		  var d=new Date();
 		    		  d.setTime(d.getTime()+1800000);
 		    		  var expires=d.toGMTString();
-		    		  document.cookie="session="+data+"; expires="+expires;
+		    		  document.cookie="session="+data.sessionID+"; expires="+expires;
 	    		  }
 	    		  else{
 	    			  readCookie();
@@ -99,8 +99,8 @@ window.fbAsyncInit = function() {
 				    			type:'GET',
 				    			data: { "action": "verify", "sessionID": session},
 				    		success:function(data){
-				    			console.log("data received" + data.data);
-				    			if(data.substring(0,4)=="true"){
+				    			console.log("Request stats: " + data.status);
+				    			if(data.data=="true"){
 				    				console.log("tere");
 				    				var el1 = document.getElementById("logoutButton");
 				    				el1.style.visibility = "visible";
