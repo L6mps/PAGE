@@ -45,7 +45,8 @@ public class Velocity extends HttpServlet {
         VelocityContext context = new VelocityContext();
         // add additional data to the context here
         // it can then be used inside the templates
-        resp.setContentType("text/html; charset=UTF-8");
+        resp.setContentType("text/html");
+		resp.setCharacterEncoding("charset=UTF-8");
         getTemplate(req).merge(context, resp.getWriter());
     }
 
