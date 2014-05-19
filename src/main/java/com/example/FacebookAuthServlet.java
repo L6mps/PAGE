@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+@WebServlet(name = "FacebookAuth", urlPatterns = {"/facebook"})
 public class FacebookAuthServlet extends HttpServlet{
 	//TODO: FBAuth peab:	
 	// 1: uue kasutaja login - genereerib andmebaasi kirje

@@ -11,6 +11,7 @@ import java.util.HashSet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-
+@WebServlet(name = "SubmitServlet", urlPatterns = {"/submit"})
 public class SubmitServlet extends HttpServlet{
 	private VelocityEngine engine;
 	private VelocityEngine createVelocityEngine(ServletContext cont){

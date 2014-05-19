@@ -4,14 +4,30 @@ $(document).ready(function(){
 	});
 });
 
-$('#jqsubmit').click(function(){
-	var maakond = $('#D1').val();
-	var vald = $('#D2').val();
-	alert("Valisid : " + maakond + " valla " + vald);
+//Server-sent event catcher - restarts every 1 minute to refresh the session - if the session is not refreshed
+// the server assumes that connection has been lost and stops sending information.
+/*
+$(document).ready(function(){
+    setInterval(function() {
+    	 var eventSource = new EventSource("counter");
+         
+    	    eventSource.onmessage = function(event) {
+    	    	console.log(event.data);
+    	        document.getElementById('counting').innerHTML = event.data;
+    	     
+    	    };
+    }, 60000);
 });
-$.ajaxSetup({
-	cache:true
-});
+*/
+function counterInit(){
+	var eventSource = new EventSource("counter");
+    
+    eventSource.onmessage = function(event) {
+    	console.log(event.data);
+        document.getElementById('counting').innerHTML = event.data;
+     
+    };
+}
 
 function submitForm(){
 	var var1 = document.getElementById('search').value;

@@ -9,10 +9,11 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.SessionCookieConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 	
 	DBProvider dbprovider;

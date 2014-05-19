@@ -3,98 +3,31 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-
+	
+	<filter>
+    	<filter-name>GzipFilter</filter-name>
+   		<filter-class>org.eclipse.jetty.servlets.GzipFilter</filter-class>
+    	<init-param>
+    		<param-name>mimeTypes</param-name>
+    		<param-value>text/html,text/plain,text/xml,application/xhtml+xml,text/css,application/javascript,application/json,image/svg+xml</param-value>
+    	</init-param>
+	</filter>
+	
+	
+	<filter-mapping>
+    	<filter-name>GzipFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-	<servlet>
-		<servlet-name>hello</servlet-name>
-		<servlet-class>com.example.HelloServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>search</servlet-name>
-		<servlet-class>com.example.SearchServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>catalogue</servlet-name>
-		<servlet-class>com.example.CatalogueServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>submit</servlet-name>
-		<servlet-class>com.example.SubmitServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>main</servlet-name>
-		<servlet-class>com.example.MainSearchServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Velocity</servlet-name>
-		<servlet-class>com.example.Velocity</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>com.example.LoginServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Facebook</servlet-name>
-		<servlet-class>com.example.FacebookAuthServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>item</servlet-name>
-		<servlet-class>com.example.ItemServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>counter</servlet-name>
-		<servlet-class>com.example.CounterServlet</servlet-class>
-	</servlet>
 
 	<listener>
 		<listener-class>com.example.SessionCounter</listener-class>
 	</listener>
 
-	<servlet-mapping>
-		<servlet-name>counter</servlet-name>
-		<url-pattern>/counter</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>item</servlet-name>
-		<url-pattern>/item</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>hello</servlet-name>
-		<url-pattern>/hello/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>search</servlet-name>
-		<url-pattern>/search</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>catalogue</servlet-name>
-		<url-pattern>/catalogue</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>submit</servlet-name>
-		<url-pattern>/submit</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>main</servlet-name>
-		<url-pattern>/main</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Velocity</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Facebook</servlet-name>
-		<url-pattern>/facebook</url-pattern>
-	</servlet-mapping>
-
-	
-	
+		
 </web-app>

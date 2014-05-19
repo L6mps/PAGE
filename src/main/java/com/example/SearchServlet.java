@@ -9,6 +9,7 @@ import java.io.StringWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.json.JSONObject;
-
+@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
 public class SearchServlet extends HttpServlet {
 	private VelocityEngine engine;
 
@@ -92,4 +93,26 @@ public class SearchServlet extends HttpServlet {
 		System.out.println(req.getParameter("search"));
 		
 	}
+	//TODO: WORK IN PROGRESS
+	private String handleSearchString(String search){
+		String[] matches = {"õ", "ä", "ö", "ü", "Õ", "Ä", "Ö", "Ü"};
+		String[] matcher = {"%C3%B5","%C3%A4","%C3%B6","%C3%BC","%C3%95","%C3%84","%C3%96","%C3%9C"};
+		if(search.contains("%")){
+			//Handling special characters - õäöü ÕÄÖÜ
+			String[] subsearch = search.split("+");
+			StringBuilder sb = new StringBuilder();
+			for(String subs : subsearch){
+				if(subs.contains("%")){
+					for(int i=0; i<matcher.length; i++){
+						if(subs.contains(matcher[i])){
+							subs.replace(matcher[i], matches[i]);
+						}
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
 }
