@@ -81,9 +81,7 @@ window.fbAsyncInit = function() {
 		    		  var expires=d.toGMTString();
 		    		  document.cookie="session="+data.data+"; expires="+expires;
 	    		  }
-	    		  else{
-	    			  readCookie();
-	    		  }
+	    		  readCookie();
 	    	  }
 	      });
 	    });

@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -42,42 +44,22 @@ public class CatalogueServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
-		VelocityContext context = new VelocityContext();
-		Template temp = null;
-		try{
-			temp = engine.getTemplate("catalogue.html", "UTF-8");
-		}
-		catch( ResourceNotFoundException rnfe )
-		{
-			rnfe.printStackTrace();
-		   // couldn't find the template
-		}
-		catch( ParseErrorException pee )
-		{
-			pee.printStackTrace();
-		  // syntax error: problem parsing the template
-		}
-		catch( MethodInvocationException mie )
-		{
-			mie.printStackTrace();
-		  // something invoked in the template
-		  // threw an exception
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace();
-		}
+		JSONObject json = new JSONObject();
+		json.append("status","success");
 		List<CatalogueItem> loll=mapSelections();
-		CatalogueItem[] items = new CatalogueItem[loll.size()];
+		JSONObject[] items = new JSONObject[loll.size()];
 		int i=0;
 		for(CatalogueItem item:loll){
-			items[i]=item;
+			items[i]=new JSONObject();
+			items[i].append("count", item.getCount());
+			items[i].append("location", item.getLocation());
 			i++;
 		}
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding("UTF-8");
-		context.put("results", items);
-		temp.merge(context,resp.getWriter());
+		resp.setContentType("application/json");
+		json.append("result",items);
+		PrintWriter out = resp.getWriter();
+		out.print(json);
+		out.close();
 
 	}
 	@Override

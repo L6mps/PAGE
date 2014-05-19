@@ -48,7 +48,7 @@ function submitForm(){
 	var var8 = document.getElementById('D2').value;
 	$.ajax({
 		url: "/search",
-		type: 'GET',
+		type: 'POST',
 		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
         success:function(response){
@@ -57,4 +57,19 @@ function submitForm(){
         }
 	});
 	
+}
+function populateCatalogue(){
+	$.ajax({
+  	  url: "/catalogue",
+  	  type: 'GET',
+  	  success:function(data){
+  		  var inHtml="";
+  		  console.log("request status:" + data.status);
+  		  for(var i in data.result[0]){
+  			  item=data.result[0][i];
+  			  inHtml += '<li>'+item.location + ' (' + item.count + ')</li>';
+  		  }
+  		  document.getElementById("catalogueList").innerHTML = inHtml;
+  	  }
+    });
 }

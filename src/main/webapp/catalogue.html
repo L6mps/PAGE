@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-#include("html/head.html")
+<meta charset="UTF-8">
+<script src="js/jquery-2.1.0.js"></script>
+<script src="js/testscripts.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css" media="screen">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<title>Pageproject - hooldekodude andmebaas</title>
 </head>
 
-<body class="main">
-	#include("html/header.html")
-	<div id="container">
-	#include("html/search-sidebar.html")
-	<div id="page_content">
+<body class="main" onload="populateCatalogue()")>
+	<div id="catalogue">
 	<h1>Hooldekogude arv maakondade l6ikes:</h1>
-	<ul>
-	#foreach($item in $results)
-		<li>$item.location ($item.count )</li>
-		#end
+	<ul id="catalogueList">
 	</ul>
-	</div>
 	</div>
 </body>
 </html>
