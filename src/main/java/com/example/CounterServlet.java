@@ -21,7 +21,7 @@ public class CounterServlet extends HttpServlet{
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter writer = response.getWriter();
 		for(int i=0; i<30;i++){
-			System.out.println("Sessions active:" + SessionCounter.getActiveSessionNumber());
+			//System.out.println("Sessions active:" + SessionCounter.getActiveSessionNumber());
 			writer.write("data: " + SessionCounter.getActiveSessionNumber() + "\n\n");
 			writer.flush();
 			try{
