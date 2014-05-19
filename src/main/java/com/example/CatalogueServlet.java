@@ -82,7 +82,7 @@ public class CatalogueServlet extends HttpServlet {
 		DBProvider dbengine = new DBProvider();
 		ResultSet rs;
 		try {
-			rs = dbengine.execute("SELECT * FROM locationStatistics");
+			rs = dbengine.execute("SELECT generalinfo.location, count(generalinfo.location) AS count FROM generalinfo GROUP BY generalinfo.location;");
 			while(rs.next()) {
 				retrievedItems.add(new CatalogueItem(rs.getInt(1), rs.getInt(2)));
 			}
