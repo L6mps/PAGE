@@ -44,8 +44,8 @@ function submitForm(){
 	if(document.getElementById('paidservices').checked){
 		var var6 = document.getElementById('paidservices').value;
 	}
-	var var7 = document.getElementById('D1').value;
-	var var8 = document.getElementById('D2').value;
+	var var7 = document.getElementById('M1').value;
+	var var8 = document.getElementById('M2').value;
 	$.ajax({
 		url: "/search",
 		type: 'POST',
