@@ -34,7 +34,7 @@ public class SubmitServlet extends HttpServlet{
 		return engine;
 	}
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		Enumeration enums = req.getParameterNames();
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -95,6 +95,8 @@ public class SubmitServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		temp.merge(context, sw);
+		resp.setContentType("text/html");
+		resp.setCharacterEncoding("UTF-8");
 		PrintWriter write = resp.getWriter();
 		write.println(sw);
 	}

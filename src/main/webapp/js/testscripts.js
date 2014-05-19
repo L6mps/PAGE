@@ -47,7 +47,7 @@ function submitForm(){
 	var var7 = document.getElementById('M1').value;
 	var var8 = document.getElementById('M2').value;
 	$.ajax({
-		url: "/search",
+		url: "/submit",
 		type: 'POST',
 		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
@@ -56,7 +56,8 @@ function submitForm(){
         	$("frame").fadeIn(2000);
         }
 	});
-	
+	el = document.getElementById("addModal");
+	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 function populateCatalogue(){
 	$.ajax({
