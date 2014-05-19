@@ -30,26 +30,26 @@ function counterInit(){
 }
 
 function submitForm(){
-	var var1 = document.getElementById('search').value;
-	var var2 = document.getElementById('price').value;
-	if(document.getElementById('demented').checked){
-		var var3 = document.getElementById('demented').value;
+	var var1 = document.getElementById('name1').value;
+	var var2 = document.getElementById('price1').value;
+	if(document.getElementById('demented1').checked){
+		var var3 = document.getElementById('demented1').value;
 	}
-	if(document.getElementById('wheelchair').checked){
-	var var4 = document.getElementById('wheelchair').value;
+	if(document.getElementById('wheelchair1').checked){
+	var var4 = document.getElementById('wheelchair1').value;
 	}
-	if(document.getElementById('nursing').checked){
-		var var5 = document.getElementById('nursing').value;
+	if(document.getElementById('nursing1').checked){
+		var var5 = document.getElementById('nursing1').value;
 	}
-	if(document.getElementById('paidservices').checked){
-		var var6 = document.getElementById('paidservices').value;
+	if(document.getElementById('paidservices1').checked){
+		var var6 = document.getElementById('paidservices1').value;
 	}
 	var var7 = document.getElementById('M1').value;
 	var var8 = document.getElementById('M2').value;
 	$.ajax({
 		url: "/submit",
 		type: 'POST',
-		data : { "search": var1, "price": var2, "demented": var3, "wheelchair": var4, 
+		data : { "name": var1, "price": var2, "demented": var3, "wheelchair": var4, 
 			"nursing": var5, "paidservices": var6, "D1": var7, "D2": var8} ,
         success:function(response){
         	$('#frame').contents().find('html').html(response);
