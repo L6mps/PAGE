@@ -1,0 +1,34 @@
+﻿  /* CSS layout */
+body {
+	margin: 0;
+	padding: 50;
+}
+
+#masthead {
+	text-align:center;
+}
+
+#container {
+	margin-left:auto;
+	margin-right:auto;
+	width:60%;
+	padding: 20px;
+	min-width: 600px;
+}
+
+#left_col {
+	padding: 20px;
+	width: 200px;
+	float:left;
+}
+
+#page_content {
+	margin-left:200px;
+	padding: 20px;
+	position:fixed;
+	max-width: 800px;
+}
+
+#paragraph {
+	width: 800px;
+}
