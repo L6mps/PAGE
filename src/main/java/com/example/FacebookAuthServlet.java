@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 @WebServlet(name = "FacebookAuth", urlPatterns = {"/facebook"})
 public class FacebookAuthServlet extends HttpServlet{
 	//TODO: FBAuth peab:	
@@ -25,25 +26,28 @@ public class FacebookAuthServlet extends HttpServlet{
 		dbprovider = new DBProvider();
 		String userId = req.getParameter("userId");
 		String output = "";
+		JSONObject json=new JSONObject();
 		System.out.println("I'm being used! By:" + userId);
 		try{
-			output = handleLogin(userId);
+			json= handleLogin(userId);
 		} catch (Exception e){
-			output = "{'status':'error', 'data':'generalfailure'}";
+			json.append("stats", "error");
+			json.append("data", "generalfailure");
+			output = "{'stats':'error', 'data':'generalfailure'}";
 			// THIS IS BAD.
 		}
 		PrintWriter outWriter = resp.getWriter();
-		resp.setContentType("application/json");
-		outWriter.println(output);
+		resp.setContentType("application/json; charset=UTF-8");
+		outWriter.println(json);
 		outWriter.close();
 		dbprovider.closeConn();
 	}	
 	
-	private String handleLogin(String userId){
+	private JSONObject handleLogin(String userId){
 		String dataGet = null;
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM users WHERE fbid = '"+userId+"';");
-		ResultSet rs = null;	
+		ResultSet rs = null;
 		try {
 			rs = dbprovider.execute(sb.toString());
 			if(rs.next()){
@@ -54,17 +58,19 @@ public class FacebookAuthServlet extends HttpServlet{
 			e.printStackTrace();
 			rs=null;
 		}
-		String data = "{'status':'failure', 'data':'verifiyfailure'}";
+		JSONObject json=new JSONObject();
+		json.append("status", "error");
+		json.append("data", "verifyfailure");
 		if(dataGet==null){
-			data = addNewFacebookUser(userId);
+			json = addNewFacebookUser(userId);
 		} else if(dataGet == userId){
-			data = doLogin(userId);
+			json = doLogin(userId);
 			
 		}
-		return data;
+		return json;
 	}
 	
-	private String addNewFacebookUser(String userId){
+	private JSONObject addNewFacebookUser(String userId){
 		//TODO: Add facebook user to database.
 		return doLogin(userId);
 	}
@@ -93,15 +99,20 @@ public class FacebookAuthServlet extends HttpServlet{
 			return "loginsuccess";
 		}
 	
-	private String doLogin(String user){
+	private JSONObject doLogin(String user){
 		String sessionID = createSessionId();
 		System.out.println(sessionID);
 		String data = verifyUserLogin(user, sessionID);
+		JSONObject json=new JSONObject();
 		if(data==null){
-			return "{ 'status':'error', 'data':'' }";
-		} else {
+			json.append("status", "error");
+			json.append("data", "");
+			return json;
+		} else{
 			System.out.println("wtf");
-			return "{ 'status':'success', 'data':'"+sessionID+"' }";
+			json.append("status", "success");
+			json.append("data", sessionID);
+			return json;
 		}
 	}
 }

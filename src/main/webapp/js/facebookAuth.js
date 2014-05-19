@@ -74,12 +74,12 @@ window.fbAsyncInit = function() {
 	    		  console.log("request status:" + data.status);
 	    		  var cookiedough=$.cookie('session');
 	    		  console.log(cookiedough);
-	    		  if(cookiedough!=data.sessionID){
-		    		  console.log(data.sessionID+" 2");
+	    		  if(cookiedough!=data.data){
+		    		  console.log(data.data+" 2");
 		    		  var d=new Date();
 		    		  d.setTime(d.getTime()+1800000);
 		    		  var expires=d.toGMTString();
-		    		  document.cookie="session="+data.sessionID+"; expires="+expires;
+		    		  document.cookie="session="+data.data+"; expires="+expires;
 	    		  }
 	    		  else{
 	    			  readCookie();

@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 	
@@ -21,35 +23,36 @@ public class LoginServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		dbprovider = new DBProvider();
-		String output = "";
+		JSONObject json = new JSONObject();
 		try{		
 			String action = request.getParameter("action");
 			String userName = request.getParameter("user");
 			String password = request.getParameter("password");
 			String loginSessionID = request.getParameter("sessionID");
 			if(action==null){
-				output = "{ 'status':'error' }";
+				json.append("status","error");
 			} else {
 				System.out.println("asd");
 				if(action=="login"){
-					output = login(userName, password);
+					json=login(userName,password);
 				}
 				else if(action.equals("verify")){
 					System.out.println("asd");
-					output = verify(loginSessionID);
+					json=verify(loginSessionID);
 				}
 				else if(action=="logout"){
-					output = logout(userName, loginSessionID);
+					json=logout(userName,loginSessionID);
 				}
 			}
 		} catch (Exception e){
-			output="{ 'status':'error', 'data':'generalfailure' }";
+			json.append("status","error");
+			json.append("data","generalfailure");
 			//Now what?
 			e.printStackTrace();
 		}
 		PrintWriter outWriter = response.getWriter();
 		response.setContentType("application/json");
-		outWriter.println(output);
+		outWriter.println(json);
 		outWriter.close();
 		dbprovider.closeConn();
 	}
@@ -95,13 +98,19 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 	
-	private String login(String user, String pw){
+	private JSONObject login(String user, String pw){
 		String sessionID = createSessionId();
 		String data = verifyUserLogin(user, pw, sessionID);
+		JSONObject json = new JSONObject();
 		if(data==null){
-			return "{ 'status':'error', 'data':'' }";
+			json.append("status", "error");
+			json.append("data","");
+			return json;
 		} else {
-			return "{ 'status':'success', 'data':'" + data +"', 'sessionID':'"+sessionID+"' }";
+			json.append("status", "success");
+			json.append("data", data);
+			json.append("sessionID",sessionID);
+			return json;
 		}
 	}
 	
@@ -140,18 +149,26 @@ public class LoginServlet extends HttpServlet {
 		return BCrypt.hashpw( password, username);
 	}
 	
-	private String verify(String sessionCheckID){
+	private JSONObject verify(String sessionCheckID){
 		String data = checkCachedSession(sessionCheckID);
 		String[] split = data.split(";");
 		data=split[1];
+		JSONObject json = new JSONObject();
 		if(data==null){
-			return "{ 'status':'error', 'data':'' }";
+			System.out.println("madeithere");
+			json.append("status", "error");
+			json.append("data","");
+			return json;
 		} else {
-			return "{ 'status':'success', 'data':'"+data+"' }";
+			System.out.println("madeit");
+			json.append("status", "success");
+			json.append("data", data);
+			return json;
 		}
 	}
 	
-	private String logout(String user, String loginSessionId){
+	private JSONObject logout(String user, String loginSessionId){
+		JSONObject json = new JSONObject();
 		if(executeLogout(user, loginSessionId)){
 			try {
 				dbprovider.execute("DELETE FROM activeSessions WHERE sessionid = '"+loginSessionId+"'");
@@ -159,9 +176,11 @@ public class LoginServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "{'status':'success'}";
+			json.append("status","success");
+			return json;
 		} else {
-			return "{'status':'error'}";	
+			json.append("status","error");
+			return json;	
 		}
 		
 	}
