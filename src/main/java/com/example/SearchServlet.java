@@ -95,10 +95,9 @@ public class SearchServlet extends HttpServlet {
 	}
 	//TODO: WORK IN PROGRESS
 	private String handleSearchString(String search){
-		String[] matches = {"õ", "ä", "ö", "ü", "Õ", "Ä", "Ö", "Ü"};
+		String[] matches = {"o", "a", "o", "u", "O", "A", "O", "U"};
 		String[] matcher = {"%C3%B5","%C3%A4","%C3%B6","%C3%BC","%C3%95","%C3%84","%C3%96","%C3%9C"};
 		if(search.contains("%")){
-			//Handling special characters - õäöü ÕÄÖÜ
 			String[] subsearch = search.split("+");
 			StringBuilder sb = new StringBuilder();
 			for(String subs : subsearch){
