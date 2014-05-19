@@ -160,9 +160,9 @@
 						<configuration>
                           <artifactItems>
                               <artifactItem>
-                                  <groupId>org.eclipse.jetty</groupId>
-                                  <artifactId>jetty-runner</artifactId>
-                                  <version>9.1.2.v20140210</version>
+                                  <groupId>org.mortbay.jetty</groupId>
+								  <artifactId>jetty-runner</artifactId>
+								  <version>8.1.0.RC5</version>
                                   <destFileName>jetty-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
