@@ -2,13 +2,10 @@
 <script src="js/testscripts.js"></script>
 
 		<form id="testform" target="frame" enctype="application/x-www-form-urlencoded">
-			Nimi:<br><input type="search" id="search" name="search"><br>
-			Maksimumhind:<br><input type="text" id="price" name="price" value=""><br>
-			<input type="checkbox" id="demented" name="demented" value="1">Dementsus<br>
-			<input type="checkbox" id="wheelchair" name="wheelchair" value="1">Ratastool<br>
-			<input type="checkbox" id="nursing" name="nursing" value="1">6endusabi<br>
-			<input type="checkbox" id="paidservices" name="paidservices" value="1">Tasuline hooldus<br>
-			<select id="D1" name="D1" onchange="changeLocation('D1', 'D2')">
+			<div id="searchStuff">
+			Nimi:<input type="search" id="search" name="search"><br>
+			Maksimumhind:<input type="text" id="price" name="price" value=""></div>
+			<div id="searchStuff"><select id="D1" name="D1" onchange="changeLocation('D1', 'D2')">
 			  <option value="0">K6ik maakonnad</option>
 			  <option value="1">Harjumaa</option>
 			  <option value="2">Hiiumaa</option>
@@ -28,7 +25,13 @@
 			</select><br>
 			<select id="D2" name="D2">
 			  <option value="0">K6ik vallad</option>
-			</select><br>
-			<button type="submit" id="jqsubmit" formaction="/search">JQuerySubmit</button>
+			</select>
+			</div>
+			<div id="searchStuff"><input type="checkbox" id="demented" name="demented" value="1">Dementsus
+			<input type="checkbox" id="wheelchair" name="wheelchair" value="1">Ratastool<br>
+			<input type="checkbox" id="nursing" name="nursing" value="1">6endusabi
+			<input type="checkbox" id="paidservices" name="paidservices" value="1">Tasuline hooldus
+			</div>
+			<div><button type="submit" id="jqsubmit" formaction="/search">JQuerySubmit</button></div>
 		</form>
 	</div>
