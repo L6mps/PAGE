@@ -43,6 +43,7 @@ public class SubmitServlet extends HttpServlet{
 			String paramValue = req.getParameter(paramName);
 			map.put(paramName, paramValue);
 		}
+		System.out.println("D1 is : " + map.get("D1"));
 		DBProvider dbprovider = new DBProvider();
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO generalInfo (name, location, location_specific, price, mainoptions) VALUES (");
