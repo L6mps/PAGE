@@ -6,21 +6,9 @@
 			<a target="frame" href="html/hello.html">Teenused</a> |
 			<a target="frame" href="html/hello.html">Abi</a> |
 			<a id="adding" href="#" onclick="add()">Lisa</a>|
-			<a id="loginButton" href="#" onclick="loginModal()">Login</a>
-			<a id="logoutButton" href="#" onclick="loginModal()">Logout</a>
+			<div id="fbButton" class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
 			<a id="counting"></a>
 		</nav>
-	</div>
-	<div id="loginModal">
-		<div id="login">
-				<label for="userName">Username:</label><br>
-				<input type="text" id="userName" name="userName" placeholder="Username"><br>
-				<label for="password">Password:</label><br>
-				<input type="text" id="password" name="password" placeholder="Password"><br>
-				<button onclick="loginModal()" id="loginSubmit">Login</button>
-				<div id="fbButton" class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
-				<button onclick="loginModal()" id="cancelLogin">Cancel</button>
-		</div>
 	</div>
 	<div id="addModal">
 	<div id="add">

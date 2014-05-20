@@ -59,16 +59,35 @@ function submitForm(){
 	el = document.getElementById("addModal");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
+function populateCounties(state){
+	$.ajax({
+	  	  url: "/catalogue",
+	  	  type: 'GET',
+	  	  data: {"state":state},
+	  	  success:function(data){
+	  		  var inHtml=document.getElementById(state).innerHTML;
+	  		  inHtml+='<br><ul>';
+	  		  console.log("request status:" + data.status);
+	  		  for(var i in data.result[0]){
+	  			  item=data.result[0][i];
+	  			  inHtml += '<li>'+item.location + ' (' + item.count + ')</li>';
+	  		  }
+	  		  inHtml+='</ul>';
+	  		  document.getElementById(state).innerHTML = inHtml;
+	  	  }
+	    });
+}
 function populateCatalogue(){
 	$.ajax({
   	  url: "/catalogue",
   	  type: 'GET',
+  	  async:false,
   	  success:function(data){
   		  var inHtml="";
   		  console.log("request status:" + data.status);
   		  for(var i in data.result[0]){
   			  item=data.result[0][i];
-  			  inHtml += '<li>'+item.location + ' (' + item.count + ')</li>';
+  			  inHtml += '<li id="'+item.location+'"><span onclick=populateCounties("'+item.location +'")>'+item.location + ' (' + item.count + ')</span></li>';
   		  }
   		  document.getElementById("catalogueList").innerHTML = inHtml;
   	  }

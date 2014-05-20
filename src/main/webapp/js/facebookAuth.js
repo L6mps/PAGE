@@ -70,6 +70,7 @@ window.fbAsyncInit = function() {
 	    	  url: "/facebook",
 	    	  type: 'GET',
 	    	  data:	{"userId": id},
+	    	  async:false,
 	    	  success:function(data){
 	    		  console.log("request status:" + data.status);
 	    		  var cookiedough=$.cookie('session');
@@ -91,38 +92,17 @@ window.fbAsyncInit = function() {
 		  var session = $.cookie('session');
 		  console.log(session);
 		  if(session){
-			  console.log("hello2");
-				    	   		$.ajax({
-				    			url:"/login",
-				    			type:'GET',
-				    			data: { "action": "verify", "sessionID": session},
-				    		success:function(data){
-				    			console.log("Request stats: " + data.status);
-				    			if(data.data=="true"){
-				    				console.log("tere");
-				    				var el1 = document.getElementById("logoutButton");
-				    				el1.style.visibility = "visible";
-				    				var el2 = document.getElementById("loginButton");
-				    				el2.style.visibility = "hidden";
-				    				var el3 = document.getElementById("adding");
-				    				el3.style.visibility = "visible";
-				    			}
-				    			else{
-				    				var el1 = document.getElementById("logoutButton");
-				    				el1.style.visibility = "hidden";
-				    				var el2 = document.getElementById("loginButton");
-				    				el2.style.visibility = "visible";
-				    				var el3 = document.getElementById("adding");
-				    				el3.style.visibility = "hidden";
-				    			}
-				    		},
-				    		error:function(response){
-				    			$.removeCookie('session');
-				    		}
-				    		});
-				    		return false;
-		  }
-		  return true;
+				console.log("tere");
+				var el3 = document.getElementById("adding");
+				el3.style.visibility = "visible";
+				return false;
+			}
+			else{
+				var el3 = document.getElementById("adding");
+				el3.style.visibility = "hidden";
+				return true;
+			}
+		  
   }
   function loginModal(){
 		el = document.getElementById("loginModal");

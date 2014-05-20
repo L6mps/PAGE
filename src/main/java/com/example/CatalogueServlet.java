@@ -43,11 +43,18 @@ public class CatalogueServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
 		JSONObject json = new JSONObject();
 		json.append("status","success");
-		List<CatalogueItem> loll=mapSelections();
-		JSONObject[] items = new JSONObject[loll.size()];
+		JSONObject[] items;
+		List<CatalogueItem> loll;
+		if(req.getParameter("state")==null){
+			loll=mapSelections();
+			
+		}
+		else{
+			loll=mapSelections(req.getParameter("state"));
+		}
+		items = new JSONObject[loll.size()];
 		int i=0;
 		for(CatalogueItem item:loll){
 			items[i]=new JSONObject();
@@ -75,6 +82,60 @@ public class CatalogueServlet extends HttpServlet {
 		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
 		System.out.println(br.readLine());
 		
+	}
+	
+	private int stateStringToInt(String state){
+		if(state.equals("Muu"))
+			return 0;
+		else if(state.equals("Harjumaa"))
+			return 1;
+		else if(state.equals("Hiiumaa"))
+			return 2;
+		else if(state.equals("Ida-Virumaa"))
+			return 3;
+		else if(state.equals("J6gevamaa"))
+			return 4;
+		else if(state.equals("J2rvamaa"))
+			return 5;
+		else if(state.equals("L22nemaa"))
+			return 6;
+		else if(state.equals("L22ne-Virumaa"))
+			return 7;
+		else if(state.equals("Põlvamaa"))
+			return 8;
+		else if(state.equals("P2rnumaa"))
+			return 9;
+		else if(state.equals("Raplamaa"))
+			return 10;
+		else if(state.equals("Saaremaa"))
+			return 11;
+		else if(state.equals("Tartumaa"))
+			return 12;
+		else if(state.equals("Valgamaa"))
+			return 13;
+		else if(state.equals("Viljandimaa"))
+			return 14;
+		else if(state.equals("V6rumaa"))
+			return 15;
+		return -1;
+	}
+	
+	private List<CatalogueItem> mapSelections(String state) {
+		List<CatalogueItem> retrievedItems = new ArrayList<CatalogueItem>();
+		DBProvider dbengine = new DBProvider();
+		ResultSet rs;
+		int s = stateStringToInt(state);
+		try {
+			rs = dbengine.execute("SELECT location_specific, count(*) FROM generalinfo WHERE location = "+s+" GROUP BY location_specific");
+			while(rs.next()) {
+				retrievedItems.add(new CatalogueItem(rs.getInt(1), rs.getInt(2), s));
+			}
+			rs.close();
+			dbengine.closeConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return retrievedItems;
 	}
 	
 	private List<CatalogueItem> mapSelections() {
