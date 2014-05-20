@@ -11,32 +11,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-public class SessionCounter implements HttpSessionListener {
+public class SessionCounter {
     public static ConcurrentHashMap<String, ArrayList<CounterServlet>> sessions = new ConcurrentHashMap<String,ArrayList<CounterServlet>>();
-    private List automaticSessions = new ArrayList();
     public SessionCounter() {
     }
- 
-    @Override
-    public void sessionCreated(HttpSessionEvent event) {
-    	System.out.println("Session created! ID : " + event.getSession().getId());
-        HttpSession session = event.getSession();
-        automaticSessions.add(session.getId());
- 
-        session.setAttribute("counter", this);
-    }
- 
-    @Override
-    public void sessionDestroyed(HttpSessionEvent event) {
-        HttpSession session = event.getSession();
-        automaticSessions.remove(session.getId());
- 
-        session.setAttribute("counter", this);
-    }
- 
-    public int getAutoActiveSessionNumber() {
-        return sessions.size();
-    }
+
 
     public static int getActiveSessionNumber(){
     	return SessionCounter.sessions.size();
@@ -47,10 +26,15 @@ public class SessionCounter implements HttpSessionListener {
     }
     
     public static void unregisterSessionServlet(HttpSession session, CounterServlet servlet){
+    	try{
     	if(SessionCounter.sessions.get(session.getId()).size()>1){
     		SessionCounter.sessions.get(session.getId()).remove(servlet);
     	} else {
     		SessionCounter.sessions.remove(session.getId());
+    	}
+    	}
+    	catch (NullPointerException e){
+    		// Session did not exist - do nothing.
     	}
     	
     }
