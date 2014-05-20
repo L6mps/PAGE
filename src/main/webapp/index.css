@@ -42,9 +42,8 @@ table, td , tr{
 }
 #left_col {
 	display:inline-block;
-	*display:inline;
-	*zoom:1;
-	overflow:hidden;
+	display:inline;
+	zoom:1;
 	background-color:#CCCCCC;
 	/*margin:10px;*/
 	margin-bottom:1%;
