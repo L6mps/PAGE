@@ -3,7 +3,9 @@ package com.example;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,7 +29,6 @@ public class SubmitServlet extends HttpServlet{
 	private VelocityEngine engine;
 	private VelocityEngine createVelocityEngine(ServletContext cont){
 		String path = cont.getRealPath("/");
-        System.out.println(path);
         engine = new VelocityEngine();
         engine.addProperty("file.resource.loader.path", path);
         engine.init();
@@ -43,7 +44,6 @@ public class SubmitServlet extends HttpServlet{
 			String paramValue = req.getParameter(paramName);
 			map.put(paramName, paramValue);
 		}
-		System.out.println("D1 is : " + map.get("D1"));
 		DBProvider dbprovider = new DBProvider();
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO generalInfo (name, location, location_specific, price, mainoptions) VALUES (");
@@ -52,24 +52,45 @@ public class SubmitServlet extends HttpServlet{
 		sb.append("'"+Integer.parseInt(map.get("D2"))+"', ");
 		sb.append("'"+Integer.parseInt(map.get("price"))+"', ");
 		int mainopts = 0;
-		if(map.containsKey("demented") && map.get("demented").equals("1"))
+		boolean[] services = new boolean[4];
+		Arrays.fill(services, false);
+		if(map.containsKey("demented") && map.get("demented").equals("1")){
 			mainopts+=1;
-		if(map.containsKey("wheelchair") && map.get("wheelchair").equals("1"))
+			services[0] = true;
+		}
+		if(map.containsKey("wheelchair") && map.get("wheelchair").equals("1")){
 			mainopts+=2;
-		if(map.containsKey("nursing") && map.get("nursing").equals("1"))
+			services[1] = true;
+		}
+		if(map.containsKey("nursing") && map.get("nursing").equals("1")){
 			mainopts+=4;
-		if(map.containsKey("paid services") && map.get("paid services").equals("1"))
+			services[2] = true;
+		}
+		if(map.containsKey("paid services") && map.get("paid services").equals("1")){
 			mainopts+=8;
+			services[3] = true;
+		}
 		sb.append("'"+mainopts+"');");
+		ResultSet rs = null;
+		int newId;
 		try {
 			dbprovider.executeAdd(sb.toString());
+			rs = dbprovider.execute("SELECT * FROM generalInfo where name='"+map.get("name")+"';");
+			rs.next();
+			newId = rs.getInt(1);
+			rs.close();
+			for(int i=0; i<4; i++){
+				if(services[i]){
+					dbprovider.executeAdd("INSERT INTO service"+(i+1)+" (id) VALUES ("+newId+ ");");
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		StringWriter sw = new StringWriter();
 		VelocityContext context = new VelocityContext();
-		System.out.println(req.getParameter("price"));
 		Template temp = null;
 		try{
 			temp = engine.getTemplate("html/added.html", "UTF-8");

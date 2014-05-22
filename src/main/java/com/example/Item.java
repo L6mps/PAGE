@@ -450,4 +450,9 @@ public class Item extends Object{
 			}
 		}
 	}
+	@Override
+	public String toString(){
+		
+		return "["+this.getName() + ", " + this.getPrice() + ", " + this.getOptionals() +"]";
+	}
 }

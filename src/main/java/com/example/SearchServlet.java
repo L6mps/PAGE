@@ -45,8 +45,10 @@ public class SearchServlet extends HttpServlet {
 		VelocityContext context = new VelocityContext();
 		System.out.println(req.getParameter("price"));
 		Template temp = null;
+		Template noTemp = null;
 		try{
 			temp = engine.getTemplate("search.html", "UTF-8");
+			noTemp = engine.getTemplate("/html/noResults.html", "UTF-8");
 		}
 		catch( ResourceNotFoundException rnfe )
 		{
@@ -69,7 +71,7 @@ public class SearchServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		Item[] items = new Item[searchEngine.getItems().size()];
-		System.out.println(searchEngine.getItems().size());
+		int size = searchEngine.getItems().size();
 		int i=0;
 		for(Item item:searchEngine.getItems()){
 			items[i]=item;
@@ -78,7 +80,11 @@ public class SearchServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
 		context.put("results", items);
-		temp.merge(context,resp.getWriter());
+		if(size==0){
+			noTemp.merge(context, resp.getWriter());
+		}else {
+			temp.merge(context,resp.getWriter());
+		}
 
 	}
 	@Override
