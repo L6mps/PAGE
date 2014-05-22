@@ -14,6 +14,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,9 @@ public class SubmitServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		Cookie[] cookies = req.getCookies();
+		boolean permission = permissionCheck(cookies);
+		if(permission){
 		Enumeration enums = req.getParameterNames();
 		HashMap<String, String> map = new HashMap<String, String>();
 		while(enums.hasMoreElements()){
@@ -120,9 +124,42 @@ public class SubmitServlet extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		PrintWriter write = resp.getWriter();
 		write.println(sw);
+		} else {
+			resp.sendError(HttpServletResponse.SC_FORBIDDEN, "You do not have the required permission for this action!");
+		}
 	}
 	public void init(ServletConfig config) throws ServletException {
         super.init(config);
         engine = createVelocityEngine(config.getServletContext());
     }
+	
+	private boolean permissionCheck(Cookie[] cookies){
+		Cookie sessionCookie = null;
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equalsIgnoreCase("session")){
+				sessionCookie = cookie;
+			}
+		} if(sessionCookie==null){
+			System.out.println("PERMISSIONS DENIED");
+			return false;
+		} else {
+			String val = sessionCookie.getValue();
+			DBProvider dbprovider = new DBProvider();
+			val.replace(";","");
+			try {
+				ResultSet rs = dbprovider.execute("SELECT * FROM activeSessions where sessionid = '"+val+"'");
+				rs.next();
+				String user = rs.getString(2);
+				boolean permission = rs.getBoolean(3);
+				rs.close();
+				dbprovider.closeConn();
+				System.out.println("PERMISSIONS GRANTED!");
+				return permission;
+			} catch (SQLException e) {
+				System.out.println("PERMISSIONS DENIED");
+				//If the query fails, do not grant permission to edit!
+				return false;
+			}			
+		}
+	}
 }

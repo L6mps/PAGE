@@ -47,6 +47,7 @@ public class FacebookAuthServlet extends HttpServlet{
 	private JSONObject handleLogin(String userId){
 		String dataGet = null;
 		StringBuilder sb = new StringBuilder();
+		System.out.println("I got a userId!: " + userId);
 		sb.append("SELECT * FROM users WHERE fbid = '"+userId+"';");
 		ResultSet rs = null;
 		try {
@@ -62,9 +63,13 @@ public class FacebookAuthServlet extends HttpServlet{
 		JSONObject json=new JSONObject();
 		json.append("status", "error");
 		json.append("data", "verifyfailure");
+		dataGet = dataGet.trim();
+		userId = userId.trim();		
 		if(dataGet==null){
+			System.out.println("data = null");
 			json = addNewFacebookUser(userId);
-		} else if(dataGet == userId){
+		} else if(dataGet.equalsIgnoreCase(userId)){
+			System.out.println("I know you! Login.");
 			json = doLogin(userId);
 			
 		}

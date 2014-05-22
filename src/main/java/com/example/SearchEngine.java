@@ -23,7 +23,6 @@ public class SearchEngine {
 	public SearchEngine(Map<String, String[]> paramMap, Enumeration<String> params, String searchString, String priceString){
 		this.mappedParameters = paramMap;
 		translatePrice(priceString);
-		System.out.println(searchString + " is the given searchstring");
 		this.searchString = handleSearchString(searchString);
 		paramKeys = new ArrayList<String>();
 		selectedParams = new boolean[4];
@@ -61,7 +60,6 @@ public class SearchEngine {
 				//Here we check that the item that is about to be added contains (or the other way around) the search term and is
 				//cheaper than the price requested.
 				Item item = new Item(rs.getInt(1), rs.getString(2),rs.getInt(5) ,rs.getInt(3), rs.getInt(4),rs.getInt(10), rs.getString(11), rs.getString(7), rs.getString(6), rs.getString(8), rs.getString(9));
-				System.out.println("Current item:" + item);
 				boolean check1 = item.getName().toLowerCase().contains(searchString.toLowerCase());
 				boolean check2 = searchString.toLowerCase().contains(item.getName().toLowerCase());
 				boolean check3;
