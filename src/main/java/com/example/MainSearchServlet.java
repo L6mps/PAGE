@@ -37,7 +37,8 @@ public class MainSearchServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
+		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames(), req.getParameter("search")
+				, req.getParameter("price"));
 		VelocityContext context = new VelocityContext();
 		Template temp = null;
 		try{

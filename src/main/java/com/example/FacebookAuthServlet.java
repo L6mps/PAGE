@@ -72,7 +72,16 @@ public class FacebookAuthServlet extends HttpServlet{
 	}
 	
 	private JSONObject addNewFacebookUser(String userId){
-		//TODO: Add facebook user to database.
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO users (fbid) values( ");
+		sb.append(userId);
+		sb.append(");");
+		try {
+			dbprovider.execute(sb.toString());
+		} catch (SQLException e) {
+			System.out.println("SQL Exception has appeared while adding a new FBID!");
+			e.printStackTrace();
+		}
 		return doLogin(userId);
 	}
 	
@@ -110,7 +119,6 @@ public class FacebookAuthServlet extends HttpServlet{
 			json.append("data", "");
 			return json;
 		} else{
-			System.out.println("wtf");
 			json.append("status", "success");
 			json.append("data", sessionID);
 			return json;

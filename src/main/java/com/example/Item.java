@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item extends Object{
-	private int id;
+	private int id, loc1int, loc2int;
 	private String name;
 	private int price;
 	private String loc1;
@@ -18,6 +18,8 @@ public class Item extends Object{
 	private String optionals;
 	public Item(int id, String name, int price, int loc1, int loc2, int mainopts, String coords, String fulltext, String summary, String picAddress, String optionals) {
 		super();
+		this.loc1int = loc1;
+		this.loc2int = loc2;
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -30,6 +32,13 @@ public class Item extends Object{
 		this.idRow = "<a href=\"item?id="+id+"\">";
 		addAdditionals(mainopts);
 		generateBinary();
+	}
+	
+	public String getLoc1Int(){
+		return String.valueOf(loc1int);
+	}
+	public String getLoc2Int(){
+		return String.valueOf(loc2int);
 	}
 	
 	private void addAdditionals(int mainopts) {

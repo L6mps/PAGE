@@ -40,7 +40,8 @@ public class SearchServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames());
+		SearchEngine searchEngine = new SearchEngine(req.getParameterMap(), req.getParameterNames(), req.getParameter("search"),
+				req.getParameter("price"));
 		VelocityContext context = new VelocityContext();
 		System.out.println(req.getParameter("price"));
 		Template temp = null;
@@ -94,25 +95,6 @@ public class SearchServlet extends HttpServlet {
 		System.out.println(req.getParameter("search"));
 		
 	}
-	//TODO: WORK IN PROGRESS
-	private String handleSearchString(String search){
-		String[] matches = {"o", "a", "o", "u", "O", "A", "O", "U"};
-		String[] matcher = {"%C3%B5","%C3%A4","%C3%B6","%C3%BC","%C3%95","%C3%84","%C3%96","%C3%9C"};
-		if(search.contains("%")){
-			String[] subsearch = search.split("+");
-			StringBuilder sb = new StringBuilder();
-			for(String subs : subsearch){
-				if(subs.contains("%")){
-					for(int i=0; i<matcher.length; i++){
-						if(subs.contains(matcher[i])){
-							subs.replace(matcher[i], matches[i]);
-						}
-					}
-				}
-			}
-		}
-		
-		return null;
-	}
+	
 	
 }

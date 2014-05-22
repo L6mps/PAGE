@@ -155,12 +155,12 @@ public class LoginServlet extends HttpServlet {
 		data=split[1];
 		JSONObject json = new JSONObject();
 		if(data==null){
-			System.out.println("madeithere");
+			System.out.println("Verify data null");
 			json.append("status", "error");
 			json.append("data","");
 			return json;
 		} else {
-			System.out.println("madeit");
+			System.out.println("Verification successful");
 			json.append("status", "success");
 			json.append("data", data);
 			return json;
