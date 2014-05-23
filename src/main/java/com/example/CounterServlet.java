@@ -33,5 +33,4 @@ public class CounterServlet extends HttpServlet{
 		SessionCounter.unregisterSessionServlet(request.getSession(), this);
 		writer.close();
 	}
-
 }

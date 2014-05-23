@@ -106,12 +106,24 @@ public class LoginServlet extends HttpServlet {
 			json.append("status", "error");
 			json.append("data","");
 			return json;
-		} else {
-			json.append("status", "success");
-			json.append("data", data);
-			json.append("sessionID",sessionID);
-			return json;
-		}
+		} else{
+			String checking = checkExistingSessions(user);
+			if(checking!=""){
+				json.append("status", "success");
+				json.append("data", data);
+				json.append("sessionID", checking);	
+				return json;
+			} else if(data.equalsIgnoreCase("loginfailure")) {
+				json.append("status", "success");
+				json.append("data", data);
+				return json;
+			} else {
+				json.append("status", "success");
+				json.append("data", data);
+				json.append("sessionID", sessionID);
+				return json;
+			}
+		} 
 	}
 	
 	private static String createSessionId(){
@@ -203,5 +215,23 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		return false;
+	}
+	
+	
+	private String checkExistingSessions(String user) {
+		String checkSession = "";
+		try {
+			ResultSet rs = dbprovider
+					.execute("select * from activeSessions where username='"
+							+ user + "';");
+			rs.next();
+			if (rs.getString(2).equalsIgnoreCase(user)) {
+				checkSession = rs.getString(1);
+			}
+		} catch (SQLException e) {
+
+		}
+		return checkSession;
+
 	}
 }
