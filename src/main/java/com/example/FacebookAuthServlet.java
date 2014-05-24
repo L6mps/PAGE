@@ -34,6 +34,7 @@ public class FacebookAuthServlet extends HttpServlet {
 		try {
 			json = handleLogin(userId);
 		} catch (Exception e) {
+			e.printStackTrace();
 			json.append("stats", "error");
 			json.append("data", "generalfailure");
 			output = "{'stats':'error', 'data':'generalfailure'}";
@@ -65,7 +66,7 @@ public class FacebookAuthServlet extends HttpServlet {
 		JSONObject json = new JSONObject();
 		json.append("status", "error");
 		json.append("data", "verifyfailure");
-		dataGet = dataGet.trim();
+		if(dataGet!=null)dataGet = dataGet.trim();
 		userId = userId.trim();
 		if (dataGet == null) {
 			System.out.println("data = null");
@@ -80,11 +81,11 @@ public class FacebookAuthServlet extends HttpServlet {
 
 	private JSONObject addNewFacebookUser(String userId) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO users (fbid) values( ");
+		sb.append("INSERT INTO users (fbid) values(");
 		sb.append(userId);
 		sb.append(");");
 		try {
-			dbprovider.execute(sb.toString());
+			dbprovider.executeAdd(sb.toString());
 		} catch (SQLException e) {
 			System.out
 					.println("SQL Exception has appeared while adding a new FBID!");
